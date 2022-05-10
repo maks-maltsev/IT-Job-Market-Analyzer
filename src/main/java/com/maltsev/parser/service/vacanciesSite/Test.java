@@ -1,48 +1,35 @@
 package com.maltsev.parser.service.vacanciesSite;
 
-import com.maltsev.parser.service.frameworks.Framework;
-import com.maltsev.parser.service.programmingLanguage.Language;
+import com.maltsev.parser.service.frameworks.IFrameworks;
+import com.maltsev.parser.service.programmingLanguage.ILanguages;
 
 import java.io.IOException;
-import java.util.*;
 
 public class Test {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         WorkUa workUa = new WorkUa();
-        DjinniCo djinniCo = new DjinniCo();
         JobsUa jobsUa = new JobsUa();
+        DjinniCo djinniCo = new DjinniCo();
+        String [] frameworks = IFrameworks.frameworks;
+        String [] languages = ILanguages.languages;
 
-        Set<String> workUaSet = workUa.selectAllVacancies(workUa.getSiteLink());
-        Set<String> djinnoCoSet = djinniCo.selectAllVacancies(djinniCo.getSiteLink());
-        Set<String> jobsUaSet = jobsUa.selectAllVacancies(jobsUa.getSiteLink());
+        workUa.selectDescriptions(workUa.getSiteLink());
+        djinniCo.selectDescriptions(djinniCo.getSiteLink());
+        jobsUa.selectDescriptions(jobsUa.getSiteLink());
 
-        Set<String> all = new HashSet<>();
-
-        all.addAll(workUaSet);
-        all.addAll(djinnoCoSet);
-        all.addAll(jobsUaSet);
-
-        System.out.println(all.size());
-
-
-        Language language = new Language();
-        String [] languages = language.getLanguages();
-        int [] languageAmount = new int[languages.length];
-
-        for(int j = 0; j < languages.length; j++){
-            languageAmount[j] = workUa.vacanciesCounter(languages[j], all );
+        for(int j = 0; j < frameworks.length; j++){
+            jobsUa.frameworksCounter(frameworks[j], jobsUa.getVacanciesDescriptionsSet());
+        }
+        System.out.println(" ");
+        for(int j = 0; j < frameworks.length; j++){
+            workUa.frameworksCounter(frameworks[j], workUa.getVacanciesDescriptionsSet());
+        }
+        System.out.println(" ");
+        for(int j = 0; j < frameworks.length; j++){
+            djinniCo.frameworksCounter(frameworks[j], djinniCo.getVacanciesDescriptionsSet());
         }
 
-        for(int j = 0; j < languages.length; j++){
-            System.out.println(languages[j] + " = " + languageAmount[j]);
-        }
-        int total = 0;
-        for (int i: languageAmount) {
-            total+=i;
-        }
-
-        System.out.println(total);
     }
 
 }

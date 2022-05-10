@@ -3,10 +3,6 @@ package com.maltsev.parser.service.vacanciesSite;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.*;
@@ -16,25 +12,34 @@ import java.util.*;
 @ToString
 public abstract class Site {
 
-   private Set<String> vacanciesSet = new HashSet<>();
-   // private HashMap<String, Integer> hashMap = new HashMap<>();
+   public abstract Set<String> selectVacanciesTitles(String siteLink) throws IOException;
+   public abstract Set<String> selectDescriptions(String siteLink) throws IOException, InterruptedException;
+   private String siteName;
 
-    public abstract Set<String> selectAllVacancies(String siteLink) throws IOException;
-
-   public int vacanciesCounter(String name, Set<String> set){
+   public int vacanciesCounter(String languageName, Set<String> vacanciesSet){
         int counter = 0;
         List<String> vacanciesList = new ArrayList<>();
-        vacanciesList.addAll(set);
-
+        vacanciesList.addAll(vacanciesSet);
         for(int i = 0; i < vacanciesList.size(); i++){
-            if(vacanciesList.get(i).toLowerCase().contains(name + " ") || vacanciesList.get(i).toLowerCase().contains(name + "-")
-                    || vacanciesList.get(i).toLowerCase().contains(name + ",") || vacanciesList.get(i).toLowerCase().contains(name + ".")){
+            if(vacanciesList.get(i).toLowerCase().contains(languageName + " ") || vacanciesList.get(i).toLowerCase().contains(languageName + "-")
+                    || vacanciesList.get(i).toLowerCase().contains(languageName + ",") || vacanciesList.get(i).toLowerCase().contains(languageName + ".")){
                 counter++;
             }
-
         }
-
+       System.out.println(languageName + ": " + counter);
         return counter;
     }
 
+    public int frameworksCounter(String frameworkName, Set<String> descriptionsSet){
+        int counter = 0;
+        List<String> descriptionsList = new ArrayList<>();
+        descriptionsList.addAll(descriptionsSet);
+        for(int i = 0; i < descriptionsList.size(); i++){
+            if(descriptionsList.get(i).toLowerCase().contains(frameworkName)){
+                counter++;
+            }
+        }
+        System.out.println(frameworkName + " = " + counter);
+        return counter;
+    }
 }

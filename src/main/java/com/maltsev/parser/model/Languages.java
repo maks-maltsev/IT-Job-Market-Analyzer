@@ -17,10 +17,7 @@ public class Languages {
     private Long id;
 
     private String name;
-
     private int amount;
-
-
     private String date;
 
     public Languages(String name, int amount, String date) {

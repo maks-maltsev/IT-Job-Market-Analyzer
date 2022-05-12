@@ -21,8 +21,8 @@ public abstract class Site {
         List<String> vacanciesList = new ArrayList<>();
         vacanciesList.addAll(vacanciesSet);
         for(int i = 0; i < vacanciesList.size(); i++){
-            if(vacanciesList.get(i).toLowerCase().contains(languageName + " ") || vacanciesList.get(i).toLowerCase().contains(languageName + "-")
-                    || vacanciesList.get(i).toLowerCase().contains(languageName + ",") || vacanciesList.get(i).toLowerCase().contains(languageName + ".")){
+            if(vacanciesList.get(i).toLowerCase().contains(" " + languageName + " ") || vacanciesList.get(i).toLowerCase().contains(" " + languageName + "-")
+                    || vacanciesList.get(i).toLowerCase().contains(" " + languageName + ",") || vacanciesList.get(i).toLowerCase().contains(" " + languageName + ".")){
                 counter++;
             }
         }

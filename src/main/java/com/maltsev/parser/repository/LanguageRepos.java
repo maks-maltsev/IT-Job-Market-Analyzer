@@ -1,12 +1,13 @@
 package com.maltsev.parser.repository;
 
 import com.maltsev.parser.model.Languages;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
 
-public interface LanguageRepos extends CrudRepository<Languages, Long> {
+public interface LanguageRepos extends JpaRepository<Languages, Long> {
 
 //Add new language/amount
     @Query(value = "INSERT INTO language (name, amount) VALUES (?1, ?2)", nativeQuery = true)
@@ -18,6 +19,4 @@ public interface LanguageRepos extends CrudRepository<Languages, Long> {
 
     @Query(value = "SELECT amount FROM language ORDER BY amount DESC", nativeQuery = true)
     ArrayList<Integer> selectLanguagesAmountArray();
-
-
 }

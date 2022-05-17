@@ -34,4 +34,5 @@ public class Requirements {
         this.amount = amount;
         this.date = date;
     }
+
 }

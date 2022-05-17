@@ -11,15 +11,13 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WorkUa extends Site{
-    @Getter
+@Getter
+public class WorkUa extends AbstractSite {
     private Set<String> vacanciesTitlesSet = new HashSet<>();
-    @Getter
     private Set<String> vacanciesDescriptionsSet = new HashSet<>();
     //143 pages
     private int pages = 100;
     private String siteName = "https://www.work.ua";
-    @Getter
     private String siteLink = "https://www.work.ua/ru/jobs-it/?page=";
 
     @Override
@@ -58,4 +56,5 @@ public class WorkUa extends Site{
         }
         return vacanciesDescriptionsSet;
     }
+
 }

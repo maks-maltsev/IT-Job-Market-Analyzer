@@ -9,13 +9,10 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.*;
 
-public class JobsUa extends Site {
-
-    @Getter
+@Getter
+public class JobsUa extends AbstractSite {
     private Set<String> vacanciesTitlesSet = new HashSet<>();
-    @Getter
     private Set<String> vacanciesDescriptionsSet = new HashSet<>();
-    @Getter
     private String siteLink = "https://jobs.ua/vacancy/it_web_specialists/page-";
     //13 pages
     private int pages = 10;

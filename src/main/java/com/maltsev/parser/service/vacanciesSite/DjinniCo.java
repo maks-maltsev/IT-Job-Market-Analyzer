@@ -4,25 +4,20 @@ import lombok.Getter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DjinniCo extends Site {
+@Getter
+public class DjinniCo extends AbstractSite{
 
-    @Getter
     private Set<String> vacanciesTitlesSet = new HashSet<>();
-    @Getter
     private Set<String> vacanciesDescriptionsSet = new HashSet<>();
     //4500 pages
-    @Getter
     private int pages = 100;
-    @Getter
     private String siteName = "https://djinni.co";
-    @Getter
     private String siteLink = "https://djinni.co/developers/?from=dou-footer&page=";
 
     @Override

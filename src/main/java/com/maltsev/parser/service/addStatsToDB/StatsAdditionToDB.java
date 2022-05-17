@@ -1,4 +1,4 @@
-package com.maltsev.parser.controller;
+package com.maltsev.parser.service.addStatsToDB;
 
 import com.maltsev.parser.model.Frameworks;
 import com.maltsev.parser.model.Languages;
@@ -9,23 +9,19 @@ import com.maltsev.parser.repository.RequirementsRepos;
 import com.maltsev.parser.service.frameworks.iFrameworks;
 import com.maltsev.parser.service.programmingLanguage.iLanguages;
 import com.maltsev.parser.service.requirements.iRequirements;
-import com.maltsev.parser.service.vacanciesSite.DjinniCo;
-import com.maltsev.parser.service.vacanciesSite.JobsUa;
 import com.maltsev.parser.service.vacanciesSite.WorkUa;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
-@Controller
-public class RequirementsController {
+@EnableScheduling
+public class StatsAdditionToDB {
     @Autowired
     FrameworksRepos frameworksRepos;
     @Autowired
@@ -33,32 +29,10 @@ public class RequirementsController {
     @Autowired
     RequirementsRepos requirementsRepos;
 
-    SimpleDateFormat formatter= new SimpleDateFormat("MMMM-yyyy");
+    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM");
     Date date = new Date(System.currentTimeMillis());
-
-    @GetMapping("/requirements")
-    public String requirementsPage (Model model){
-        ArrayList<String> requirementsName = requirementsRepos.selectRequirementsArray();
-        ArrayList<Integer> requirementsAmount = requirementsRepos.selectRequirementsAmountArray();
-
-        model.addAttribute("requirementsName", requirementsName);
-        model.addAttribute("requirementsAmount", requirementsAmount);
-        return "requirements-popularity";
-    }
-
-    @GetMapping("/requirements/{date}")
-    public String pickRequirementsStatsByDate(@RequestParam(name = "date") String date,
-                                           Model model){
-        ArrayList<String> requirements = requirementsRepos.selectRequirementsArrayWhereDateIs(date);
-        ArrayList<Integer> requirementsAmount = requirementsRepos.selectRequirementsAmountArrayWhereDateIs(date);
-
-        model.addAttribute("requirements", requirements);
-        model.addAttribute("requirementsAmount", requirementsAmount);
-        return "requirements-popularity";
-    }
-
-    @PostMapping("/requirements/refresh-tables")
-    public String refreshTables() throws ExecutionException, InterruptedException {
+    @Scheduled(cron = "0 1 0 1 * *")
+    public void runAfterObjectCreated() throws ExecutionException, InterruptedException {
         Set<String> allDescriptionsSet = new HashSet<>();
         allDescriptionsSet.addAll(new WorkUa().returnAllDescriptions());
 
@@ -80,8 +54,5 @@ public class RequirementsController {
             Requirements requirements1 = new Requirements(requirements[i], new WorkUa().frameworksCounter(requirements[i], allDescriptionsSet), formatter.format(date));
             requirementsRepos.save(requirements1);
         }
-
-        return "redirect:/requirements";
     }
-
 }

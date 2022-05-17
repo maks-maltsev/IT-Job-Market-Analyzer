@@ -9,14 +9,17 @@ import java.util.List;
 
 public interface FrameworksRepos extends CrudRepository<Frameworks, Long> {
 
-//Add new framework/amount
-    @Query(value = "INSERT INTO framework (name, amount, date) VALUES (?1, ?2, ?3)", nativeQuery = true)
-    void insertFrameworkData (String name, int amount, String date);
-
 //Select all frameworks/amount info
     @Query(value = "SELECT name FROM framework ORDER BY amount DESC", nativeQuery = true)
     ArrayList<String> selectFrameworksArray();
 
     @Query(value = "SELECT amount FROM framework ORDER BY amount DESC", nativeQuery = true)
     ArrayList<Integer> selectFrameworksAmountArray();
+
+//Select stats by date
+    @Query(value = "SELECT name FROM framework WHERE date = (?1) ORDER BY amount DESC", nativeQuery = true)
+    ArrayList<String> selectFrameworksArrayWhereDateIs(String date);
+
+    @Query(value = "SELECT amount FROM framework WHERE date = (?1) ORDER BY amount DESC", nativeQuery = true)
+    ArrayList<Integer> selectFrameworksAmountArrayWhereDateIs(String date);
 }

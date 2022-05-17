@@ -9,14 +9,17 @@ import java.util.ArrayList;
 
 public interface LanguageRepos extends JpaRepository<Languages, Long> {
 
-//Add new language/amount
-    @Query(value = "INSERT INTO language (name, amount) VALUES (?1, ?2)", nativeQuery = true)
-    void insertLanguageData (String name, int amount);
-
 //Select all languages/amount info
     @Query(value = "SELECT name FROM language ORDER BY amount DESC", nativeQuery = true)
-    ArrayList<String> selectLanguagesArray();
+    ArrayList<String> selectLanguagesArray(String date);
 
     @Query(value = "SELECT amount FROM language ORDER BY amount DESC", nativeQuery = true)
     ArrayList<Integer> selectLanguagesAmountArray();
+
+//Select stats by date
+    @Query(value = "SELECT name FROM language WHERE date = (?1) ORDER BY amount DESC", nativeQuery = true)
+    ArrayList<String> selectLanguagesArrayWhereDateIs(String date);
+
+    @Query(value = "SELECT amount FROM language WHERE date = (?1) ORDER BY amount DESC", nativeQuery = true)
+    ArrayList<Integer> selectLanguagesAmountArrayWhereDateIs(String date);
 }

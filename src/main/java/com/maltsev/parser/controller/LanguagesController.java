@@ -2,6 +2,7 @@ package com.maltsev.parser.controller;
 
 import com.maltsev.parser.repository.LanguageRepos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +17,16 @@ import java.util.Date;
 public class LanguagesController {
     @Autowired
     public LanguageRepos languageRepos;
+    private static int total;
+    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM");
+    Date date = new Date(System.currentTimeMillis());
 
     @GetMapping("/")
-    public String main(Model model) throws IOException {
-        ArrayList<String> languages = languageRepos.selectLanguagesArray("2022-05");
-        ArrayList<Integer> languageAmount = languageRepos.selectLanguagesAmountArray();
+    public String main(Model model) {
+        ArrayList<String> languages = languageRepos.selectLanguagesArrayWhereDateIs(formatter.format(date));
+        ArrayList<Double> languageAmount = languageRepos.selectLanguagesAmountArrayWhereDateIs(formatter.format(date));
+
+        FunctionsForAllControllers.makeIntArrayToPercentDouble(languages, languageAmount, total);
 
         model.addAttribute("languages", languages);
         model.addAttribute("languageAmount", languageAmount);
@@ -28,11 +34,13 @@ public class LanguagesController {
         return "languages-popularity";
     }
 
-    @GetMapping("/{date}")
-    public String pickLanguagesStatsByDate(@RequestParam(name = "date") String date,
+    @GetMapping("/languagesDate")
+    public String pickLanguagesStatsByDate(@RequestParam(value = "chosenDate", required = false, defaultValue = "2022-05") String chosenDate,
                     Model model){
-        ArrayList<String> languages = languageRepos.selectLanguagesArrayWhereDateIs(date);
-        ArrayList<Integer> languageAmount = languageRepos.selectLanguagesAmountArrayWhereDateIs(date);
+        ArrayList<String> languages = languageRepos.selectLanguagesArrayWhereDateIs(chosenDate);
+        ArrayList<Double> languageAmount = languageRepos.selectLanguagesAmountArrayWhereDateIs(chosenDate);
+
+        FunctionsForAllControllers.makeIntArrayToPercentDouble(languages, languageAmount, total);
 
         model.addAttribute("languages", languages);
         model.addAttribute("languageAmount", languageAmount);

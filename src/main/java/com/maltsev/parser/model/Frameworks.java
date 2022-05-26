@@ -4,32 +4,30 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @ToString
-@Entity(name = "framework")
+@Entity
+@Table(name = "framework")
 public class Frameworks {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     Long id;
 
+    @Column(name = "name")
     String name;
+
+    @Column(name = "amount")
     int amount;
+
+    @Column(name = "date")
     String date;
 
     public Frameworks() {
-    }
-
-    public Frameworks(Long id, String name, int amount, String date) {
-        this.id = id;
-        this.name = name;
-        this.amount = amount;
-        this.date = date;
     }
 
     public Frameworks(String name, int amount, String date) {
@@ -38,3 +36,5 @@ public class Frameworks {
         this.date = date;
     }
 }
+
+

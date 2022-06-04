@@ -1,10 +1,10 @@
 package com.maltsev.parser.service.dataEnums;
 
 /*
-    названия с точками и прочими символами в enum-ах слишком громоздкие,
+    хранение названий с точками и прочими символами в enum-ах слишком громоздкие,
     поэтому перечисления решил хранить в интерфейсе
 */
 
-public interface iRequirements {
-    String [] requirements = {"html", "sql", "orm", "english", "nosql", "css", "git", "docker", "linux"};
+public interface IRequirements extends MyEnums {
+    String [] requirements = {"HTML", "SQL", "ORM", "NoSQL", "CSS", "GIT", "Docker", "Linux", "Senior", "Junior", "Middle"};
 }

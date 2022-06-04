@@ -1,8 +1,9 @@
 package com.maltsev.parser.controller;
 
 import com.maltsev.parser.repository.FrameworksRepos;
-import com.maltsev.parser.repository.LanguageRepos;
+import com.maltsev.parser.repository.VacanciesRepos;
 import com.maltsev.parser.repository.RequirementsRepos;
+import com.maltsev.parser.service.intToDoubleConverter.MakeIntArrayToPercentDoubleArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,6 @@ import java.util.*;
 @Controller
 public class RequirementsController {
     @Autowired
-    FrameworksRepos frameworksRepos;
-    @Autowired
-    LanguageRepos languageRepos;
-    @Autowired
     RequirementsRepos requirementsRepos;
     private static int total;
 
@@ -30,7 +27,7 @@ public class RequirementsController {
         ArrayList<String> requirementsName = requirementsRepos.selectRequirementsArrayWhereDateIs(formatter.format(date));
         ArrayList<Double> requirementsAmount = requirementsRepos.selectRequirementsAmountArrayWhereDateIs(formatter.format(date));
 
-        FunctionsForAllControllers.makeIntArrayToPercentDouble(requirementsName, requirementsAmount, total);
+        MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(requirementsName, requirementsAmount, total);
 
         model.addAttribute("requirementsName", requirementsName);
         model.addAttribute("requirementsAmount", requirementsAmount);
@@ -43,7 +40,7 @@ public class RequirementsController {
         ArrayList<String> requirementsName = requirementsRepos.selectRequirementsArrayWhereDateIs(chosenDate);
         ArrayList<Double> requirementsAmount = requirementsRepos.selectRequirementsAmountArrayWhereDateIs(chosenDate);
 
-        FunctionsForAllControllers.makeIntArrayToPercentDouble(requirementsName, requirementsAmount, total);
+        MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(requirementsName, requirementsAmount, total);
 
         model.addAttribute("requirementsName", requirementsName);
         model.addAttribute("requirementsAmount", requirementsAmount);

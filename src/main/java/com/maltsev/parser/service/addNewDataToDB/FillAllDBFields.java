@@ -1,14 +1,14 @@
 package com.maltsev.parser.service.addNewDataToDB;
 
 import com.maltsev.parser.model.Frameworks;
-import com.maltsev.parser.model.Languages;
+import com.maltsev.parser.model.Vacancies;
 import com.maltsev.parser.model.Requirements;
 import com.maltsev.parser.repository.FrameworksRepos;
-import com.maltsev.parser.repository.LanguageRepos;
+import com.maltsev.parser.repository.VacanciesRepos;
 import com.maltsev.parser.repository.RequirementsRepos;
-import com.maltsev.parser.service.dataEnums.iFrameworks;
-import com.maltsev.parser.service.dataEnums.iLanguages;
-import com.maltsev.parser.service.dataEnums.iRequirements;
+import com.maltsev.parser.service.dataEnums.IFrameworks;
+import com.maltsev.parser.service.dataEnums.IVacancies;
+import com.maltsev.parser.service.dataEnums.IRequirements;
 import com.maltsev.parser.service.vacanciesSite.WorkUa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -28,7 +28,7 @@ public class FillAllDBFields {
     @Autowired
     FrameworksRepos frameworksRepos;
     @Autowired
-    LanguageRepos languageRepos;
+    VacanciesRepos vacanciesRepos;
     @Autowired
     RequirementsRepos requirementsRepos;
 
@@ -40,9 +40,9 @@ public class FillAllDBFields {
         Set<String> allDescriptionsSet = new HashSet<>();
         allDescriptionsSet.addAll(new WorkUa().returnAllDescriptions());
 
-        String [] frameworks = iFrameworks.frameworks;
-        String [] languages = iLanguages.languages;
-        String [] requirements = iRequirements.requirements;
+        String [] frameworks = IFrameworks.frameworks;
+        String [] languages = IVacancies.vacancies;
+        String [] requirements = IRequirements.requirements;
 
         for(int i = 0; i < frameworks.length; i++){
             Frameworks frameworks1 = new Frameworks(frameworks[i], frameworksCounter(frameworks[i], allDescriptionsSet), formatter.format(date));
@@ -50,8 +50,8 @@ public class FillAllDBFields {
         }
 
         for (int i = 0; i < languages.length; i++){
-            Languages languages1 = new Languages(languages[i], vacanciesCounter(languages[i], allDescriptionsSet), formatter.format(date));
-            languageRepos.save(languages1);
+            Vacancies vacancies1 = new Vacancies(languages[i], vacanciesCounter(languages[i], allDescriptionsSet), formatter.format(date));
+            vacanciesRepos.save(vacancies1);
         }
 
         for (int i = 0; i < requirements.length; i++){
@@ -59,4 +59,5 @@ public class FillAllDBFields {
             requirementsRepos.save(requirements1);
         }
     }
+
 }

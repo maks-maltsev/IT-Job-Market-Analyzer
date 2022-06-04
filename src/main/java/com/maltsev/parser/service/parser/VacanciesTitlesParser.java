@@ -1,5 +1,8 @@
 package com.maltsev.parser.service.parser;
 
-public class VacanciesTitlesParser {
+import java.io.IOException;
+import java.util.Set;
 
+public interface VacanciesTitlesParser {
+    Set<String> selectVacanciesTitles(String siteLink) throws IOException;
 }

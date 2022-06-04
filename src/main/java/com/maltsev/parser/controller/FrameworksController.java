@@ -1,8 +1,8 @@
 package com.maltsev.parser.controller;
 
 import com.maltsev.parser.repository.FrameworksRepos;
+import com.maltsev.parser.service.intToDoubleConverter.MakeIntArrayToPercentDoubleArray;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +25,7 @@ public class FrameworksController {
         ArrayList<String> frameworksNames = frameworksRepos.selectFrameworksArrayWhereDateIs(formatter.format(date));
         ArrayList<Double> frameworksAmount = frameworksRepos.selectFrameworksAmountArrayWhereDateIs(formatter.format(date));
 
-        FunctionsForAllControllers.makeIntArrayToPercentDouble(frameworksNames, frameworksAmount, total);
+        MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(frameworksNames, frameworksAmount, total);
 
         model.addAttribute("frameworks", frameworksNames);
         model.addAttribute("frameworksAmount", frameworksAmount);
@@ -38,7 +38,7 @@ public class FrameworksController {
         ArrayList<String> frameworksNames = frameworksRepos.selectFrameworksArrayWhereDateIs(chosenDate);
         ArrayList<Double> frameworksAmount = frameworksRepos.selectFrameworksAmountArrayWhereDateIs(chosenDate);
 
-        FunctionsForAllControllers.makeIntArrayToPercentDouble(frameworksNames, frameworksAmount, total);
+        MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(frameworksNames, frameworksAmount, total);
 
         model.addAttribute("frameworks", frameworksNames);
         model.addAttribute("frameworksAmount", frameworksAmount);

@@ -1,11 +1,11 @@
 package com.maltsev.parser.service.dataEnums;
 
 /*
-    названия с точками и прочими символами в enum-ах слишком громоздкие,
+    хранение названий с точками и прочими символами в enum-ах слишком громоздкие,
     поэтому перечисления решил хранить в интерфейсе
 */
 
-public interface iFrameworks {
-    String[] frameworks = {".net", "spring", "react.js", "jquery", "express", "angular",
-    "vue.js", "flask", "django", "laravel", "ruby on rails", "gatsby", "node.js"};
+public interface IFrameworks extends MyEnums {
+    String[] frameworks = {".Net", "Spring", "React", "jQuery", "Express", "Angular",
+    "Vue.js", "Flask", "Django", "Laravel", "Ruby on Rails", "Gatsby", "Node.js"};
 }

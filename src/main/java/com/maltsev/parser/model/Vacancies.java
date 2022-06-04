@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "language")
-public class Languages {
+public class Vacancies {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +27,14 @@ public class Languages {
     @Column(name = "date")
     private String date;
 
-    public Languages(String name, int amount, String date) {
+    public Vacancies(String name, int amount, String date) {
 
         this.name = name;
         this.amount = amount;
         this.date = date;
     }
 
-    public Languages() {
+    public Vacancies() {
 
     }
 }

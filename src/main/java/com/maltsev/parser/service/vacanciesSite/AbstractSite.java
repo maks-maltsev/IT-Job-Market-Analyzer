@@ -1,20 +1,15 @@
 package com.maltsev.parser.service.vacanciesSite;
 
+import com.maltsev.parser.service.parser.VacanciesDescriptionsParser;
+import com.maltsev.parser.service.parser.VacanciesTitlesParser;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import org.aspectj.lang.annotation.Before;
-
-import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
 
 @Setter
 @Getter
-@ToString
-public abstract class AbstractSite implements Callable<Set<String>> {
-    public abstract Set<String> selectVacanciesTitles(String siteLink) throws IOException;
-    public abstract Set<String> selectDescriptions(String siteLink) throws IOException, InterruptedException;
+public abstract class AbstractSite implements Callable<Set<String>>, VacanciesDescriptionsParser, VacanciesTitlesParser {
     private String siteLink;
     private String siteName;
 

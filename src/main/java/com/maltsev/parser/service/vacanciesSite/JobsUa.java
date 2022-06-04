@@ -20,7 +20,7 @@ public class JobsUa extends AbstractSite {
 
     @Override
     public Set<String> selectVacanciesTitles(String siteLink) throws IOException {
-        System.out.println("Сбор заголовков с сайта " + siteName + " ...");
+        System.out.println("Сбор вакансий с сайта " + siteName + " ...");
         for (int i = 1; i <= pages; i++) {
             Document doc = Jsoup.connect(siteLink + i).get();
             Elements vacanciesTitles = doc.getElementsByClass("b-vacancy__top__title js-item_title");

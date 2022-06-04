@@ -1,13 +1,12 @@
 package com.maltsev.parser.repository;
 
-import com.maltsev.parser.model.Languages;
+import com.maltsev.parser.model.Vacancies;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
 
-public interface LanguageRepos extends JpaRepository<Languages, Long> {
+public interface VacanciesRepos extends JpaRepository<Vacancies, Long> {
 
 //Select stats by date
     @Query(value = "SELECT name FROM language WHERE date = (?1) ORDER BY amount DESC", nativeQuery = true)

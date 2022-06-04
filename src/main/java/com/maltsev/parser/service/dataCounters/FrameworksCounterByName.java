@@ -12,7 +12,7 @@ public class FrameworksCounterByName {
         List<String> descriptionsList = new ArrayList<>();
         descriptionsList.addAll(descriptionsSet);
         for(int i = 0; i < descriptionsList.size(); i++){
-            if(descriptionsList.get(i).toLowerCase().contains(frameworkName)){
+            if(descriptionsList.get(i).toLowerCase().contains(frameworkName.toLowerCase())){
                 counter++;
             }
         }

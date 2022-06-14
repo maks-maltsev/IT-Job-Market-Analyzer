@@ -16,6 +16,7 @@ public class FrameworksCounterByName {
                 counter++;
             }
         }
+        System.out.println(frameworkName + " : " + counter);
         return counter;
     }
 }

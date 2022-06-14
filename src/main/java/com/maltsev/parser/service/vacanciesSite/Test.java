@@ -1,18 +1,42 @@
 package com.maltsev.parser.service.vacanciesSite;
 
+import com.maltsev.parser.service.dataCounters.FrameworksCounterByName;
+import com.maltsev.parser.service.dataCounters.VacanciesCounterByName;
+
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 public class Test {
     public static void main(String[] args) {
-        Parser parser = new Parser(new JobsUa());
-        Set<String> descriptionsSet = new HashSet<>();
+        DjinniCo workUa = new DjinniCo();
+        Set<String> x = new HashSet<>();
         try {
-            descriptionsSet = parser.returnAllDescriptions();
-        } catch (ExecutionException | InterruptedException e) {
+            x.addAll(workUa.selectDescriptions(workUa.getSiteLink()));
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(descriptionsSet.size());
+        FrameworksCounterByName.frameworksCounter("CodeIgniter", x);
+        FrameworksCounterByName.frameworksCounter("Cake PHP", x);
+        FrameworksCounterByName.frameworksCounter("Grails", x);
+        FrameworksCounterByName.frameworksCounter("Vaadin", x);
+        FrameworksCounterByName.frameworksCounter("LibGDX", x);
+        FrameworksCounterByName.frameworksCounter("Skeleton", x);
+        FrameworksCounterByName.frameworksCounter("Kube", x);
+        FrameworksCounterByName.frameworksCounter("Picnic CSS", x);
+        FrameworksCounterByName.frameworksCounter("Meteor", x);
+        FrameworksCounterByName.frameworksCounter("Koa", x);
+        FrameworksCounterByName.frameworksCounter("Phoenix", x);
+        FrameworksCounterByName.frameworksCounter("Ember", x);
+        FrameworksCounterByName.frameworksCounter("Aurelia", x);
+        FrameworksCounterByName.frameworksCounter("Web2py", x);
+        FrameworksCounterByName.frameworksCounter("Pyramid", x);
+        FrameworksCounterByName.frameworksCounter("Bottle", x);
+        FrameworksCounterByName.frameworksCounter("Tornado", x);
+        FrameworksCounterByName.frameworksCounter("CherryPy", x);
+
+        System.out.println(x.size());
     }
 }

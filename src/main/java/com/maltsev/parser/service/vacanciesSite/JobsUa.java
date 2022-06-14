@@ -37,19 +37,23 @@ public class JobsUa extends AbstractSite {
     @Override
     public Set<String> selectDescriptions(String siteLink) throws IOException, InterruptedException {
         System.out.println("Сбор описаний с сайта " + siteName + " ...");
+        int x = 0;
         for(int i = 1; i <= pages; i++) {
+            System.out.println(i + " page");
             Document linksDoc = Jsoup.connect(siteLink + i).get();
             Elements links = linksDoc.getElementsByClass("b-vacancy__top__title js-item_title");
             links.forEach(link ->{
-                Document vacancyDetails = null;
                 try {
-                    vacancyDetails = Jsoup.connect(link.attr("href")).get();
+                    Document vacancyDetails = Jsoup.connect(link.attr("href")).get();
+                    vacanciesDescriptionsSet.add(vacancyDetails.getElementsByClass("b-vacancy-full__block b-text js-phone-replace").text());
+
                 } catch (IOException e) {}
-                vacanciesDescriptionsSet.add(vacancyDetails.getElementsByClass("b-vacancy-full__block b-text js-phone-replace").text());
             });
+            System.out.println(siteName + (i+10) + "% loaded...");
         }
         return vacanciesDescriptionsSet;
     }
+
 
 }
 

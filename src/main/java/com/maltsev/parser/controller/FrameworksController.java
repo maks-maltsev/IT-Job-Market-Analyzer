@@ -1,5 +1,7 @@
 package com.maltsev.parser.controller;
 
+import com.maltsev.parser.model.Frameworks;
+import com.maltsev.parser.model.Requirements;
 import com.maltsev.parser.repository.FrameworksRepos;
 import com.maltsev.parser.service.intToDoubleConverter.MakeIntArrayToPercentDoubleArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class FrameworksController {
@@ -22,8 +25,14 @@ public class FrameworksController {
 
     @GetMapping("/frameworks")
     public String frameworksPage(Model model){
-        ArrayList<String> frameworksNames = frameworksRepos.selectFrameworksArrayWhereDateIs(formatter.format(date));
-        ArrayList<Double> frameworksAmount = frameworksRepos.selectFrameworksAmountArrayWhereDateIs(formatter.format(date));
+        List<Frameworks> frameworksList = frameworksRepos.findFrameworksByDateOrderByAmountDesc(formatter.format(date));
+        List<String> frameworksNames = new ArrayList<>();
+        List<Double> frameworksAmount = new ArrayList<>();
+
+        for (int i = 0; i < frameworksList.size(); i++){
+            frameworksNames.add(frameworksList.get(i).getName());
+            frameworksAmount.add((double) frameworksList.get(i).getAmount());
+        }
 
         MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(frameworksNames, frameworksAmount, total);
 
@@ -35,8 +44,14 @@ public class FrameworksController {
     @GetMapping("/frameworksDate")
     public String pickFrameworksStatsByDate(@RequestParam(value = "chosenDate", required = false, defaultValue = "2022-05") String chosenDate,
                     Model model){
-        ArrayList<String> frameworksNames = frameworksRepos.selectFrameworksArrayWhereDateIs(chosenDate);
-        ArrayList<Double> frameworksAmount = frameworksRepos.selectFrameworksAmountArrayWhereDateIs(chosenDate);
+        List<Frameworks> frameworksList = frameworksRepos.findFrameworksByDateOrderByAmountDesc(chosenDate);
+        List<String> frameworksNames = new ArrayList<>();
+        List<Double> frameworksAmount = new ArrayList<>();
+
+        for (int i = 0; i < frameworksList.size(); i++){
+            frameworksNames.add(frameworksList.get(i).getName());
+            frameworksAmount.add((double) frameworksList.get(i).getAmount());
+        }
 
         MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(frameworksNames, frameworksAmount, total);
 

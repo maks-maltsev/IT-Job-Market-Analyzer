@@ -7,5 +7,6 @@ package com.maltsev.parser.service.dataEnums;
 
 public interface IFrameworks extends MyEnums {
     String[] frameworks = {".Net", "Spring", "React", "jQuery", "Express", "Angular",
-    "Vue.js", "Flask", "Django", "Laravel", "Ruby on Rails", "Gatsby", "Node.js"};
+    "Vue.js", "Flask", "Django", "Laravel", "Ruby on Rails", "Gatsby", "Node.js",
+    "Yii", "Zend", "JSF", "ASP.NET", "Kube", "Ember"};
 }

@@ -4,7 +4,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Languages</title>
+    <title>Vacancies</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
@@ -72,7 +72,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/requirements">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                            Other requirements
+                            Requirements
                         </a>
                     </li>
                 </ul>
@@ -81,10 +81,10 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Vacancies</h1>
+                <h1 class="h2">Rating of IT vacancies popularity</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
 
-                    <form action="/languagesDate">
+                    <form action="/vacanciesDate">
                         <label for="date">Pick required date: </label>
                         <input type="month" id="date" name="chosenDate">
                         <input type="submit">
@@ -97,13 +97,13 @@
                 <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="1040" height="439" style="display: block; width: 1040px; height: 439px;"></canvas>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <script th:inline="javascript">
-                    let lang = [[${languages}]];
-                    let amount = [[${languageAmount}]]
+                    let lang = [[${vacancies}]];
+                    let amount = [[${vacanciesAmount}]]
 
                     const data = {
                         labels: lang,
                         datasets: [{
-                            label: 'Top vacancies',
+                            label: 'Top vacancy',
                             backgroundColor: ['#0048BA', '#B0BF1A', '#B284BE', '#DB2D43', '#C46210', '#3B7A57', '#00FFFF', '#DA1884', '#8FBC8F'],
                             borderColor: 'rgb(18,215,57)',
                             data: amount,
@@ -117,6 +117,7 @@
                             indexAxis: 'y',
                         }
                     };
+
                 </script>
                 <script th:src="@{js/chartInit.js}" type="text/javascript" th:inline="javascript"></script>
             </div>

@@ -38,8 +38,6 @@ public class WorkUa extends AbstractSite {
 
     @Override
     public Set<String> selectDescriptions(String siteLink) throws IOException, InterruptedException {
-        System.out.println("Сбор описаний с сайта " + siteName + " ...");
-
         for(int i = 1; i <= pages; i++) {
             Thread.sleep(100);
             Document linkDoc = Jsoup.connect(siteLink + i).get();

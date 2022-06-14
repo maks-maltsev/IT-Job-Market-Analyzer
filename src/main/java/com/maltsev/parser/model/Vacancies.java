@@ -3,38 +3,29 @@ package com.maltsev.parser.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
 
 @ToString
 @Getter
 @Setter
-@Entity
-@Table(name = "language")
+@Document(collection = "vacancies")
 public class Vacancies {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "name")
+    @Field(name = "name")
     private String name;
 
-    @Column(name = "amount")
+    @Field(name = "amount")
     private int amount;
 
-    @Column(name = "date")
+    @Field(name = "date")
     private String date;
 
     public Vacancies(String name, int amount, String date) {
-
         this.name = name;
         this.amount = amount;
         this.date = date;
-    }
-
-    public Vacancies() {
-
     }
 }

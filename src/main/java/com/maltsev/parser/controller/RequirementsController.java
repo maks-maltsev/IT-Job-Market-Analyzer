@@ -1,5 +1,7 @@
 package com.maltsev.parser.controller;
 
+import com.maltsev.parser.model.Requirements;
+import com.maltsev.parser.model.Vacancies;
 import com.maltsev.parser.repository.FrameworksRepos;
 import com.maltsev.parser.repository.VacanciesRepos;
 import com.maltsev.parser.repository.RequirementsRepos;
@@ -24,8 +26,14 @@ public class RequirementsController {
 
     @GetMapping("/requirements")
     public String requirementsPage (Model model){
-        ArrayList<String> requirementsName = requirementsRepos.selectRequirementsArrayWhereDateIs(formatter.format(date));
-        ArrayList<Double> requirementsAmount = requirementsRepos.selectRequirementsAmountArrayWhereDateIs(formatter.format(date));
+        List<Requirements> requirementsList = requirementsRepos.findRequirementsByDateOrderByAmountDesc(formatter.format(date));
+        List<String> requirementsName = new ArrayList<>();
+        List<Double> requirementsAmount = new ArrayList<>();
+
+        for (int i = 0; i < requirementsList.size(); i++){
+            requirementsName.add(requirementsList.get(i).getName());
+            requirementsAmount.add((double) requirementsList.get(i).getAmount());
+        }
 
         MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(requirementsName, requirementsAmount, total);
 
@@ -37,8 +45,14 @@ public class RequirementsController {
     @GetMapping("/requirementsDate")
     public String pickRequirementsStatsByDate(@RequestParam(value = "chosenDate", required = false, defaultValue = "2022-05") String chosenDate,
                                             Model model){
-        ArrayList<String> requirementsName = requirementsRepos.selectRequirementsArrayWhereDateIs(chosenDate);
-        ArrayList<Double> requirementsAmount = requirementsRepos.selectRequirementsAmountArrayWhereDateIs(chosenDate);
+        List<Requirements> requirementsList = requirementsRepos.findRequirementsByDateOrderByAmountDesc(chosenDate);
+        List<String> requirementsName = new ArrayList<>();
+        List<Double> requirementsAmount = new ArrayList<>();
+
+        for (int i = 0; i < requirementsList.size(); i++){
+            requirementsName.add(requirementsList.get(i).getName());
+            requirementsAmount.add((double) requirementsList.get(i).getAmount());
+        }
 
         MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(requirementsName, requirementsAmount, total);
 

@@ -13,10 +13,11 @@ public class VacanciesCounterByName {
         vacanciesList.addAll(vacanciesSet);
 
         for(int i = 0; i < vacanciesList.size(); i++){
-            Pattern namePattern = Pattern.compile(" " + languageName.toLowerCase() + "[\\s-,.=]");
+            Pattern namePattern = Pattern.compile(" " + languageName.toLowerCase() + "[\\s-,.=/']");
             Matcher matcher = namePattern.matcher(vacanciesList.get(i).toLowerCase());
             while (matcher.find()){
                 counter++;
+                System.out.println(vacanciesList.get((i)));
             }
         }
         System.out.println(languageName + " : " + counter);

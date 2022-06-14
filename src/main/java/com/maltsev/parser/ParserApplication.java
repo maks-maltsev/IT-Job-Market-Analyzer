@@ -14,11 +14,11 @@ public class ParserApplication {
 		SpringApplication.run(ParserApplication.class, args);
 	}
 
-	@Scheduled(cron = "0 1 0 1 * *")
-	@Bean(initMethod="runAfterObjectCreated")
-	public FillAllDBFields getFunnyBean() {
-		return new FillAllDBFields();
-	}
+//	@Scheduled(cron = "0 1 0 1 * *")
+//	@Bean(initMethod="runAfterObjectCreated")
+//	public FillAllDBFields getFunnyBean() {
+//		return new FillAllDBFields();
+//	}
 
 }
 

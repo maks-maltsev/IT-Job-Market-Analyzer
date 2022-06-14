@@ -41,21 +41,23 @@ public class FillAllDBFields {
         allDescriptionsSet.addAll(new WorkUa().returnAllDescriptions());
 
         String [] frameworks = IFrameworks.frameworks;
-        String [] languages = IVacancies.vacancies;
+        String [] vacancies = IVacancies.vacancies;
+        String [] vacanciesForChart = IVacancies.vacanciesForChart;
         String [] requirements = IRequirements.requirements;
+        String [] requirementsForChart = IRequirements.requirementsForChart;
 
         for(int i = 0; i < frameworks.length; i++){
             Frameworks frameworks1 = new Frameworks(frameworks[i], frameworksCounter(frameworks[i], allDescriptionsSet), formatter.format(date));
             frameworksRepos.save(frameworks1);
         }
 
-        for (int i = 0; i < languages.length; i++){
-            Vacancies vacancies1 = new Vacancies(languages[i], vacanciesCounter(languages[i], allDescriptionsSet), formatter.format(date));
+        for (int i = 0; i < vacancies.length; i++){
+            Vacancies vacancies1 = new Vacancies(vacanciesForChart[i], vacanciesCounter(vacancies[i], allDescriptionsSet), formatter.format(date));
             vacanciesRepos.save(vacancies1);
         }
 
         for (int i = 0; i < requirements.length; i++){
-            Requirements requirements1 = new Requirements(requirements[i], frameworksCounter(requirements[i], allDescriptionsSet), formatter.format(date));
+            Requirements requirements1 = new Requirements(requirementsForChart[i], frameworksCounter(requirements[i], allDescriptionsSet), formatter.format(date));
             requirementsRepos.save(requirements1);
         }
     }

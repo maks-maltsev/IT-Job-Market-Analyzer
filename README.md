@@ -1,11 +1,20 @@
-<h1 align="center">Парсер ІТ вакансий</h1>
-<h3>Цель: </h3>
-<p>Реализовать веб-приложение, собирающее данные с открытых источников для анализа рынка труда в сфере IT, с целью выявления популярных вакансий, языков программирования, технологий используемых при разработке и требований к разработчику.</p>
-<h3>Функционал: </h3>
-<p>1. Сбор информации о вакансиях с 3-х различных ресурсов автоматически 1-го числа каждого месяца.</p>
-<p>2. Обработка данных и добавление их в БД.</p>
-<p>3. Отображение информации в виде гистограммы в веб-приложении.</p>
-<h3>Технологии использованы: </h3>
-<p>Jsoup, Java Core, Multithreading, Collections API, Spring (Boot, Data, Web), Thymeleaf, Lombok, Maven</p>
-<p>фронт: HTML, CSS, Bootstrap 5, Javascript</p>
-<p>БД: PostgreSQL</p>
+<h1 align="center">IT-vacancies parser</h1>
+<h3>Purpose: </h3>
+<p>Implement a web application that collects data from open sources to analyze the IT labor market in order to identify popular vacancies, programming languages, technologies used in development, and developer requirements.</p>
+<h3>Functionality: </h3>
+<p>1. Collecting information about vacancies from few different resources automatically on the 1st day of each month.</p>
+<p>2. Data processing and adding the data to the database.</p>
+<p>3. Displaying information as a bar graph in a web application.</p>
+<p>Result:</p>
+
+![image](https://user-images.githubusercontent.com/48401922/211929925-891839ac-11e0-4086-b880-97280c5be014.png)
+
+![image](https://user-images.githubusercontent.com/48401922/211929996-9a182cf6-aa7c-4f68-ad3d-61417a8619cf.png)
+
+![image](https://user-images.githubusercontent.com/48401922/211930066-f0c54200-8bf0-4000-ad78-6fee54859fa6.png)
+
+<h3>Technologies used: </h3>
+<p>Backend: Java 11, Spring (Boot, Web, Data)</p>
+<p>DB: MongoDB</p>
+<p>Frontend: HTML, Thymeleaf, CSS, Bootstrap 5, Javascript</p>
+<p>Other: Maven, Lombok</p>

@@ -1,38 +1,40 @@
 package com.maltsev.parser.controller;
 
-import com.maltsev.parser.model.Requirements;
-import com.maltsev.parser.model.Vacancies;
-import com.maltsev.parser.repository.FrameworksRepos;
-import com.maltsev.parser.repository.VacanciesRepos;
-import com.maltsev.parser.repository.RequirementsRepos;
+import com.maltsev.parser.entity.Requirement;
+import com.maltsev.parser.repository.RequirementRepository;
 import com.maltsev.parser.service.intToDoubleConverter.MakeIntArrayToPercentDoubleArray;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Controller
+@RestController
+@RequestMapping("/requirements")
 public class RequirementsController {
-    @Autowired
-    RequirementsRepos requirementsRepos;
-    private static int total;
+
+    private final RequirementRepository requirementRepository;
+    private int total;
 
     SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM");
     Date date = new Date(System.currentTimeMillis());
 
-    @GetMapping("/requirements")
+    public RequirementsController(RequirementRepository requirementRepository) {
+        this.requirementRepository = requirementRepository;
+    }
+
+    @GetMapping
     public String requirementsPage (Model model){
-        List<Requirements> requirementsList = requirementsRepos.findRequirementsByDateOrderByAmountDesc(formatter.format(date));
+        List<Requirement> requirementList = requirementRepository.findRequirementsByDateOrderByAmountDesc(formatter.format(date));
         List<String> requirementsName = new ArrayList<>();
         List<Double> requirementsAmount = new ArrayList<>();
 
-        for (int i = 0; i < requirementsList.size(); i++){
-            requirementsName.add(requirementsList.get(i).getName());
-            requirementsAmount.add((double) requirementsList.get(i).getAmount());
+        for (int i = 0; i < requirementList.size(); i++){
+            requirementsName.add(requirementList.get(i).getName());
+            requirementsAmount.add((double) requirementList.get(i).getAmount());
         }
 
         MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(requirementsName, requirementsAmount, total);
@@ -42,16 +44,16 @@ public class RequirementsController {
         return "requirements-popularity";
     }
 
-    @GetMapping("/requirementsDate")
+    @GetMapping("/date")
     public String pickRequirementsStatsByDate(@RequestParam(value = "chosenDate", required = false, defaultValue = "2022-05") String chosenDate,
                                             Model model){
-        List<Requirements> requirementsList = requirementsRepos.findRequirementsByDateOrderByAmountDesc(chosenDate);
+        List<Requirement> requirementList = requirementRepository.findRequirementsByDateOrderByAmountDesc(chosenDate);
         List<String> requirementsName = new ArrayList<>();
         List<Double> requirementsAmount = new ArrayList<>();
 
-        for (int i = 0; i < requirementsList.size(); i++){
-            requirementsName.add(requirementsList.get(i).getName());
-            requirementsAmount.add((double) requirementsList.get(i).getAmount());
+        for (int i = 0; i < requirementList.size(); i++){
+            requirementsName.add(requirementList.get(i).getName());
+            requirementsAmount.add((double) requirementList.get(i).getAmount());
         }
 
         MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(requirementsName, requirementsAmount, total);

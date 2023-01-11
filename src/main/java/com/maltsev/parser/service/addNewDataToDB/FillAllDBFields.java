@@ -1,11 +1,11 @@
 package com.maltsev.parser.service.addNewDataToDB;
 
-import com.maltsev.parser.model.Frameworks;
-import com.maltsev.parser.model.Vacancies;
-import com.maltsev.parser.model.Requirements;
-import com.maltsev.parser.repository.FrameworksRepos;
-import com.maltsev.parser.repository.VacanciesRepos;
-import com.maltsev.parser.repository.RequirementsRepos;
+import com.maltsev.parser.entity.Framework;
+import com.maltsev.parser.entity.Vacancy;
+import com.maltsev.parser.entity.Requirement;
+import com.maltsev.parser.repository.FrameworkRepository;
+import com.maltsev.parser.repository.VacancyRepository;
+import com.maltsev.parser.repository.RequirementRepository;
 import com.maltsev.parser.service.dataEnums.IFrameworks;
 import com.maltsev.parser.service.dataEnums.IVacancies;
 import com.maltsev.parser.service.dataEnums.IRequirements;
@@ -26,11 +26,11 @@ import static com.maltsev.parser.service.dataCounters.VacanciesCounterByName.vac
 @EnableScheduling
 public class FillAllDBFields {
     @Autowired
-    FrameworksRepos frameworksRepos;
+    FrameworkRepository frameworkRepository;
     @Autowired
-    VacanciesRepos vacanciesRepos;
+    VacancyRepository vacancyRepository;
     @Autowired
-    RequirementsRepos requirementsRepos;
+    RequirementRepository requirementRepository;
 
     SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM");
     Date date = new Date(System.currentTimeMillis());
@@ -47,18 +47,18 @@ public class FillAllDBFields {
         String [] requirementsForChart = IRequirements.requirementsForChart;
 
         for(int i = 0; i < frameworks.length; i++){
-            Frameworks frameworks1 = new Frameworks(frameworks[i], frameworksCounter(frameworks[i], allDescriptionsSet), formatter.format(date));
-            frameworksRepos.save(frameworks1);
+            Framework framework1 = new Framework(frameworks[i], frameworksCounter(frameworks[i], allDescriptionsSet), "2022-05");
+            frameworkRepository.save(framework1);
         }
 
         for (int i = 0; i < vacancies.length; i++){
-            Vacancies vacancies1 = new Vacancies(vacanciesForChart[i], vacanciesCounter(vacancies[i], allDescriptionsSet), formatter.format(date));
-            vacanciesRepos.save(vacancies1);
+            Vacancy vacancy1 = new Vacancy(vacanciesForChart[i], vacanciesCounter(vacancies[i], allDescriptionsSet), "2022-05");
+            vacancyRepository.save(vacancy1);
         }
 
         for (int i = 0; i < requirements.length; i++){
-            Requirements requirements1 = new Requirements(requirementsForChart[i], frameworksCounter(requirements[i], allDescriptionsSet), formatter.format(date));
-            requirementsRepos.save(requirements1);
+            Requirement requirement1 = new Requirement(requirementsForChart[i], frameworksCounter(requirements[i], allDescriptionsSet), "2022-05");
+            requirementRepository.save(requirement1);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.maltsev.parser.model;
+package com.maltsev.parser.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,13 +6,18 @@ import lombok.ToString;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 
-@ToString
 @Getter
 @Setter
-@Document(collection = "vacancies")
-public class Vacancies {
+@ToString
+@Document(collection = "requirements")
+public class Requirement {
+
+    @MongoId
+    @Field(name = "_id")
+    private ObjectId id;
 
     @Field(name = "name")
     private String name;
@@ -23,9 +28,10 @@ public class Vacancies {
     @Field(name = "date")
     private String date;
 
-    public Vacancies(String name, int amount, String date) {
+    public Requirement(String name, int amount, String date) {
         this.name = name;
         this.amount = amount;
         this.date = date;
     }
+
 }

@@ -1,14 +1,13 @@
 package com.maltsev.parser.repository;
 
-import com.maltsev.parser.model.Vacancies;
+import com.maltsev.parser.entity.Vacancy;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public interface VacanciesRepos extends MongoRepository<Vacancies, ObjectId> {
-    List<Vacancies> findVacanciesByDateOrderByAmountDesc(String date);
+public interface VacancyRepository extends MongoRepository<Vacancy, ObjectId> {
+    List<Vacancy> findVacanciesByDateOrderByAmountDesc(String date);
 ////Select stats by date
 //    @Query(value = "SELECT name FROM language WHERE date = (?1) ORDER BY amount DESC", nativeQuery = true)
 //    ArrayList<String> selectLanguagesArrayWhereDateIs(String date);

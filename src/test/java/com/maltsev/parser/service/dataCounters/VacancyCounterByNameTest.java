@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VacanciesCounterByNameTest {
+public class VacancyCounterByNameTest {
 
     @Test
     public void vacanciesCounterShouldIncrementIfElementInListHaveVacancyName(){

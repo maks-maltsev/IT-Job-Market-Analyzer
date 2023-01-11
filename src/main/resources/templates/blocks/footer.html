@@ -1,7 +1,13 @@
 <div th:fragment="footer">
     <footer class="footer mt-auto py-3 bg-light">
         <div class="container">
-            <span class="text-muted">Сreated by Maltsev Maksym, student of group 341 of the Odessa National Technological University</span>
+            <form method="GET" action="/subscribe">
+                Subscribe monthly updates: <input type="email" name="emailSub" placeholder="email">
+                <input type="submit" value="Subscribe">
+            </form>
+            <form method="GET" action="/unsubscribe">
+                <input type="submit" value="Unsubscribe">
+            </form>
         </div>
     </footer>
 </div>

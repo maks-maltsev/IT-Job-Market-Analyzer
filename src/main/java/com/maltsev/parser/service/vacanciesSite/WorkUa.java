@@ -38,6 +38,7 @@ public class WorkUa extends AbstractSite {
 
     @Override
     public Set<String> selectDescriptions(String siteLink) throws IOException, InterruptedException {
+        System.out.println("Збір описів ваканасій з сайта " + siteName + " ...");
         for(int i = 1; i <= pages; i++) {
             Thread.sleep(100);
             Document linkDoc = Jsoup.connect(siteLink + i).get();
@@ -51,6 +52,7 @@ public class WorkUa extends AbstractSite {
                     } catch (IOException e) {}
                 });
             } catch (IndexOutOfBoundsException e) {}
+            System.out.println(siteName + i + " % loaded...");
         }
         return vacanciesDescriptionsSet;
     }

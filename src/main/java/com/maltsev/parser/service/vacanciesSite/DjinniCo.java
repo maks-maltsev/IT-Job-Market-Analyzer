@@ -37,7 +37,7 @@ public class DjinniCo extends AbstractSite{
 
     @Override
     public Set<String> selectDescriptions(String siteLink) throws IOException {
-        System.out.println("Сбор описаний с сайта " + siteName + " ...");
+        System.out.println("Збір описів ваканасій з сайта " + siteName + " ...");
         for(int i = 1; i <= pages; i++){
             Document linkDoc = Jsoup.connect(siteLink + i).get();
             Elements detailsLink = linkDoc.getElementsByClass("profile");
@@ -48,7 +48,7 @@ public class DjinniCo extends AbstractSite{
                         vacanciesDescriptionsSet.add(vacancyDetails.getElementsByClass("col-sm-8").text());
                     } catch (IOException e) { }
                 });
-                System.out.println(siteName + i + "% loaded...");
+                System.out.println(siteName + i + " % loaded...");
             }catch (IndexOutOfBoundsException e){}
         }
         return vacanciesDescriptionsSet;

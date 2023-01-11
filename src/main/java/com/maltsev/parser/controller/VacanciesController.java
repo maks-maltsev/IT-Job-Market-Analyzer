@@ -1,38 +1,41 @@
 package com.maltsev.parser.controller;
 
-import com.maltsev.parser.model.Vacancies;
-import com.maltsev.parser.repository.VacanciesRepos;
+import com.maltsev.parser.entity.Vacancy;
+import com.maltsev.parser.repository.VacancyRepository;
 import com.maltsev.parser.service.intToDoubleConverter.MakeIntArrayToPercentDoubleArray;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/")
 public class VacanciesController {
 
-    @Autowired
-    public VacanciesRepos vacanciesRepos;
-
+    public final VacancyRepository vacancyRepository;
     private static int total;
     SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM");
     Date date = new Date(System.currentTimeMillis());
 
-    @GetMapping("/")
+    public VacanciesController(VacancyRepository vacancyRepository) {
+        this.vacancyRepository = vacancyRepository;
+    }
+
+    @GetMapping
     public String main(Model model) {
-        List<Vacancies> vacanciesList = vacanciesRepos.findVacanciesByDateOrderByAmountDesc(formatter.format(date));
+        List<Vacancy> vacancyList = vacancyRepository.findVacanciesByDateOrderByAmountDesc(formatter.format(date));
         List<String> vacancyName = new ArrayList<>();
         List<Double> vacancyAmount = new ArrayList<>();
 
-        for (int i = 0; i < vacanciesList.size(); i++){
-            vacancyName.add(vacanciesList.get(i).getName());
-            vacancyAmount.add((double) vacanciesList.get(i).getAmount());
+        for (int i = 0; i < vacancyList.size(); i++){
+            vacancyName.add(vacancyList.get(i).getName());
+            vacancyAmount.add((double) vacancyList.get(i).getAmount());
         }
 
         MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(vacancyName, vacancyAmount, total);
@@ -43,16 +46,16 @@ public class VacanciesController {
         return "vacancies-popularity";
     }
 
-    @GetMapping("/vacanciesDate")
+    @GetMapping("/date")
     public String pickLanguagesStatsByDate(@RequestParam(value = "chosenDate", required = false, defaultValue = "2022-05") String chosenDate,
                     Model model){
-        List<Vacancies> vacanciesList = vacanciesRepos.findVacanciesByDateOrderByAmountDesc(chosenDate);
+        List<Vacancy> vacancyList = vacancyRepository.findVacanciesByDateOrderByAmountDesc(chosenDate);
         List<String> vacancyName = new ArrayList<>();
         List<Double> vacancyAmount = new ArrayList<>();
 
-        for (int i = 0; i < vacanciesList.size(); i++){
-            vacancyName.add(vacanciesList.get(i).getName());
-            vacancyAmount.add((double) vacanciesList.get(i).getAmount());
+        for (int i = 0; i < vacancyList.size(); i++){
+            vacancyName.add(vacancyList.get(i).getName());
+            vacancyAmount.add((double) vacancyList.get(i).getAmount());
         }
 
         MakeIntArrayToPercentDoubleArray.makeIntArrayToPercentDouble(vacancyName, vacancyAmount, total);

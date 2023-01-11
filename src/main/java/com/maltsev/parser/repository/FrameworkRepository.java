@@ -1,16 +1,13 @@
 package com.maltsev.parser.repository;
 
-import com.maltsev.parser.model.Frameworks;
-import com.maltsev.parser.model.Vacancies;
+import com.maltsev.parser.entity.Framework;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.CrudRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public interface FrameworksRepos extends MongoRepository<Frameworks, ObjectId> {
-    List<Frameworks> findFrameworksByDateOrderByAmountDesc(String date);
+public interface FrameworkRepository extends MongoRepository<Framework, ObjectId> {
+    List<Framework> findFrameworksByDateOrderByAmountDesc(String date);
 ////Select stats by date
 //    @Query(value = "SELECT name FROM framework WHERE date = (?1) ORDER BY amount DESC", nativeQuery = true)
 //    ArrayList<String> selectFrameworksArrayWhereDateIs(String date);

@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface RequirementRepository extends MongoRepository<Requirement, ObjectId> {
-    List<Requirement> findRequirementsByDateOrderByAmountDesc(String date);
+    public List<Requirement> findRequirementsByDateOrderByAmountDesc(String date);
 }

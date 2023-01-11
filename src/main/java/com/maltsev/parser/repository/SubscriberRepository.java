@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface SubscriberRepository extends MongoRepository<Subscriber, ObjectId> {
 
-    Subscriber findFirstByEmail(String email);
+    public Subscriber findFirstByEmail(String email);
 
-    boolean existsByEmail(String email);
+    public boolean existsByEmail(String email);
 
-    List<Subscriber> findSubscribersByConfirmationIsTrue();
+    public List<Subscriber> findSubscribersByConfirmationIsTrue();
 }

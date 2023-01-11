@@ -60,6 +60,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20220924</version>
+		</dependency>
+
+
 		<!-- JPA -->
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->

@@ -3,16 +3,15 @@ package com.maltsev.parser.controller;
 import com.maltsev.parser.entity.Subscriber;
 import com.maltsev.parser.repository.SubscriberRepository;
 import com.maltsev.parser.service.emailSender.EmailSenderService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class UserController {
 
     private final SubscriberRepository subscriberRepository;
-
     private final EmailSenderService senderService;
 
     public UserController(SubscriberRepository subscriberRepository, EmailSenderService senderService) {
@@ -29,7 +28,7 @@ public class UserController {
 
     @GetMapping("/confirmation")
     public String confirmation(){
-        return "confirm-form";
+        return "subscription-views/confirm-form";
     }
 
     @PostMapping("/confirmation")
@@ -43,13 +42,13 @@ public class UserController {
             return "redirect:/";
         }
         else{
-            return "confirm-form";
+            return "subscription-views/confirm-form";
         }
     }
 
     @GetMapping("/unsubscribe")
     public String unsubscribeGet(){
-        return "unsubscribe-form";
+        return "subscription-views/unsubscribe-form";
     }
 
     @PostMapping("/unsubscribe")

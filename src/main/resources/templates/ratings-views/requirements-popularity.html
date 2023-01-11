@@ -66,7 +66,7 @@
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">
+                        <a class="nav-link active" aria-current="page" href="/vacancies">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><rect x="18" y="3" width="4" height="18"></rect><rect x="10" y="8" width="4" height="13"></rect><rect x="2" y="13" width="4" height="8"></rect></svg>
                             Vacancies
                         </a>
@@ -92,7 +92,7 @@
                 <h1 class="h2">Rating of requirements popularity</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
 
-                    <form action="/requirementsDate">
+                    <form action="/requirements-date">
                         <label for="date">Pick required date: </label>
                         <input type="month" id="date" name="chosenDate">
                         <input type="submit">
@@ -107,7 +107,6 @@
                 <script th:inline="javascript">
                     let requirementsName = [[${requirementsName}]];
                     let amount = [[${requirementsAmount}]]
-
                     const data = {
                         labels: requirementsName,
                         datasets: [{
@@ -132,7 +131,7 @@
         </main>
     </div>
 </div>
-<footer th:insert="blocks/footer"></footer>
+<footer th:insert="static-blocks/footer"></footer>
 
 <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

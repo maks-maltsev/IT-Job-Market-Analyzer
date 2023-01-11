@@ -3,12 +3,13 @@ package com.maltsev.parser.service.addNewDataToDB;
 import com.maltsev.parser.entity.Framework;
 import com.maltsev.parser.entity.Vacancy;
 import com.maltsev.parser.entity.Requirement;
+import com.maltsev.parser.entity.emuns.Frameworks;
+import com.maltsev.parser.entity.emuns.Requirements;
+import com.maltsev.parser.entity.emuns.Vacancies;
 import com.maltsev.parser.repository.FrameworkRepository;
 import com.maltsev.parser.repository.VacancyRepository;
 import com.maltsev.parser.repository.RequirementRepository;
-import com.maltsev.parser.service.dataEnums.IFrameworks;
-import com.maltsev.parser.service.dataEnums.IVacancies;
-import com.maltsev.parser.service.dataEnums.IRequirements;
+import com.maltsev.parser.service.dataEnums.*;
 import com.maltsev.parser.service.vacanciesSite.WorkUa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -40,24 +41,24 @@ public class FillAllDBFields {
         Set<String> allDescriptionsSet = new HashSet<>();
         allDescriptionsSet.addAll(new WorkUa().returnAllDescriptions());
 
-        String [] frameworks = IFrameworks.frameworks;
-        String [] vacancies = IVacancies.vacancies;
-        String [] vacanciesForChart = IVacancies.vacanciesForChart;
-        String [] requirements = IRequirements.requirements;
-        String [] requirementsForChart = IRequirements.requirementsForChart;
+        String[] frameworks = Frameworks.getFrameworksArray();
+        String[] vacancies = Vacancies.getVacanciesArray();
+        String[] vacanciesForChart = IVacancies.vacanciesForChart;
+        String[] requirements = Requirements.getRequirementsArray();
+        String[] requirementsForChart = IRequirements.requirementsForChart;
 
         for(int i = 0; i < frameworks.length; i++){
-            Framework framework1 = new Framework(frameworks[i], frameworksCounter(frameworks[i], allDescriptionsSet), "2022-05");
+            Framework framework1 = new Framework(frameworks[i], frameworksCounter(frameworks[i], allDescriptionsSet), formatter.format(date));
             frameworkRepository.save(framework1);
         }
 
         for (int i = 0; i < vacancies.length; i++){
-            Vacancy vacancy1 = new Vacancy(vacanciesForChart[i], vacanciesCounter(vacancies[i], allDescriptionsSet), "2022-05");
+            Vacancy vacancy1 = new Vacancy(vacanciesForChart[i], vacanciesCounter(vacancies[i], allDescriptionsSet), formatter.format(date));
             vacancyRepository.save(vacancy1);
         }
 
         for (int i = 0; i < requirements.length; i++){
-            Requirement requirement1 = new Requirement(requirementsForChart[i], frameworksCounter(requirements[i], allDescriptionsSet), "2022-05");
+            Requirement requirement1 = new Requirement(requirementsForChart[i], frameworksCounter(requirements[i], allDescriptionsSet), formatter.format(date));
             requirementRepository.save(requirement1);
         }
     }

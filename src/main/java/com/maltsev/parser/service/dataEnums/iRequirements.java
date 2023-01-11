@@ -5,10 +5,7 @@ package com.maltsev.parser.service.dataEnums;
     поэтому перечисления решил хранить в интерфейсе
 */
 
-public interface IRequirements extends MyEnums {
-    String [] requirements = {"HTML", "SQL", "ORM", "NoSQL", "CSS", "GIT", "Docker", "Linux", "OOP", "SOLID",
-            "Spoken English", "HTTP", "DNS", "Patterns",
-            "Scrum", "Agile", "Kanban", "1+", "2+", "3+", "4+", "5+"};
+public interface IRequirements {
 
     String [] requirementsForChart = {"HTML 5", "SQL", "ORM", "NoSQL", "CSS", "GIT", "Docker", "Linux system", "OOP", "SOLID",
             "Spoken English", "HTTP", "DNS", "Design Patterns",

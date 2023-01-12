@@ -1,4 +1,4 @@
-package com.maltsev.parser.service.vacanciesSite;
+package com.maltsev.parser.service.data_sources.impl;
 
 import lombok.Getter;
 
@@ -11,6 +11,7 @@ import java.util.*;
 
 @Getter
 public class JobsUa extends AbstractSite {
+
     private Set<String> vacanciesTitlesSet = new HashSet<>();
     private Set<String> vacanciesDescriptionsSet = new HashSet<>();
     private String siteLink = "https://jobs.ua/vacancy/it_web_specialists/page-";
@@ -48,7 +49,7 @@ public class JobsUa extends AbstractSite {
 
                 } catch (IOException e) {}
             });
-            System.out.println(siteName + (i+10) + " % loaded...");
+            System.out.println(siteName + " " + (i) + " % loaded...");
         }
         return vacanciesDescriptionsSet;
     }

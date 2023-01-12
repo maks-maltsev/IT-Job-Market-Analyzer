@@ -1,8 +1,7 @@
-package com.maltsev.parser.service.emailSender;
+package com.maltsev.parser.service.email_sander;
 
 import com.maltsev.parser.entity.Subscriber;
 import com.maltsev.parser.repository.SubscriberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -13,10 +12,14 @@ import java.util.Random;
 @Service
 @EnableScheduling
 public class EmailSenderService {
-    @Autowired
-    private JavaMailSender mailSender;
-    @Autowired
-    private SubscriberRepository subscriberRepository;
+
+    private final JavaMailSender mailSender;
+    private final SubscriberRepository subscriberRepository;
+
+    public EmailSenderService(JavaMailSender mailSender, SubscriberRepository subscriberRepository) {
+        this.mailSender = mailSender;
+        this.subscriberRepository = subscriberRepository;
+    }
 
     public void sendEmail(String toEmail){
         SimpleMailMessage message = new SimpleMailMessage();

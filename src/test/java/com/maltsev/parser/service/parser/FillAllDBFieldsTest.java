@@ -1,4 +1,4 @@
-package com.maltsev.parser.service.addNewDataToDB;
+package com.maltsev.parser.service.parser;
 
 import org.junit.Assert;
 import org.junit.Before;

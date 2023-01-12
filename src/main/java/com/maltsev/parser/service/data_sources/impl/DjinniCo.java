@@ -1,4 +1,4 @@
-package com.maltsev.parser.service.vacanciesSite;
+package com.maltsev.parser.service.data_sources.impl;
 
 import lombok.Getter;
 
@@ -48,7 +48,7 @@ public class DjinniCo extends AbstractSite{
                         vacanciesDescriptionsSet.add(vacancyDetails.getElementsByClass("col-sm-8").text());
                     } catch (IOException e) { }
                 });
-                System.out.println(siteName + i + " % loaded...");
+                System.out.println(siteName + " " + i + " % loaded...");
             }catch (IndexOutOfBoundsException e){}
         }
         return vacanciesDescriptionsSet;

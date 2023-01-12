@@ -1,8 +1,11 @@
-package com.maltsev.parser.service.vacanciesSite;
+package com.maltsev.parser.service.data_sources;
 
-import java.io.IOException;
+import com.maltsev.parser.service.data_sources.impl.AbstractSite;
+import com.maltsev.parser.service.data_sources.impl.DjinniCo;
+import com.maltsev.parser.service.data_sources.impl.JobsUa;
+import com.maltsev.parser.service.data_sources.impl.WorkUa;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.*;
 

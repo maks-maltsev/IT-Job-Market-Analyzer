@@ -1,4 +1,4 @@
-package com.maltsev.parser.service.vacanciesSite;
+package com.maltsev.parser.service.data_sources.impl;
 
 import lombok.Getter;
 

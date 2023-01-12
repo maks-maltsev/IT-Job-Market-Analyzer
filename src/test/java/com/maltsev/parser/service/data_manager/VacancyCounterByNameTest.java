@@ -1,4 +1,4 @@
-package com.maltsev.parser.service.dataCounters;
+package com.maltsev.parser.service.data_manager;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

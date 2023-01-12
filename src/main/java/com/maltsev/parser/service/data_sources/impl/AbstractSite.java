@@ -1,7 +1,6 @@
-package com.maltsev.parser.service.vacanciesSite;
+package com.maltsev.parser.service.data_sources.impl;
 
-import com.maltsev.parser.service.parser.VacanciesDescriptionsParser;
-import com.maltsev.parser.service.parser.VacanciesTitlesParser;
+import com.maltsev.parser.service.data_sources.Site;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.*;
@@ -9,7 +8,7 @@ import java.util.concurrent.*;
 
 @Setter
 @Getter
-public abstract class AbstractSite implements Callable<Set<String>>, VacanciesDescriptionsParser, VacanciesTitlesParser {
+public abstract class AbstractSite implements Callable<Set<String>>, Site {
     private String siteLink;
     private String siteName;
 

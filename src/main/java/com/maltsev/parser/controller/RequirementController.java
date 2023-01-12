@@ -2,7 +2,7 @@ package com.maltsev.parser.controller;
 
 import com.maltsev.parser.entity.Requirement;
 import com.maltsev.parser.repository.RequirementRepository;
-import com.maltsev.parser.service.DataService;
+import com.maltsev.parser.service.date_manager.DateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
-import static com.maltsev.parser.service.DataService.*;
+import static com.maltsev.parser.service.date_manager.DateService.*;
 
 @Controller
 public class RequirementController {
@@ -25,7 +25,7 @@ public class RequirementController {
     @GetMapping("/requirements")
     public String requirementsPage (Model model){
         List<Requirement> requirementList = requirementRepository.
-                findRequirementsByDateOrderByAmountDesc(DataService.formatter.format(date));
+                findRequirementsByDateOrderByAmountDesc(DateService.formatter.format(date));
 
         for (Requirement requirement : requirementList){
             requirementsMap.put(requirement.getName(), (double) requirement.getAmount());

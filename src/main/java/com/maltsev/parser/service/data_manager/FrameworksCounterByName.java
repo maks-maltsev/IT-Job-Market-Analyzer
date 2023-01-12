@@ -1,4 +1,4 @@
-package com.maltsev.parser.service.dataCounters;
+package com.maltsev.parser.service.data_manager;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,7 @@ package com.maltsev.parser.controller;
 
 import com.maltsev.parser.entity.Subscriber;
 import com.maltsev.parser.repository.SubscriberRepository;
-import com.maltsev.parser.service.emailSender.EmailSenderService;
+import com.maltsev.parser.service.email_sander.EmailSenderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,20 +1,11 @@
 package com.maltsev.parser;
 
-import com.maltsev.parser.entity.Subscriber;
 import com.maltsev.parser.repository.SubscriberRepository;
-import com.maltsev.parser.service.addNewDataToDB.FillAllDBFields;
-import com.maltsev.parser.service.emailSender.EmailSenderService;
+import com.maltsev.parser.service.email_sander.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 @EnableScheduling

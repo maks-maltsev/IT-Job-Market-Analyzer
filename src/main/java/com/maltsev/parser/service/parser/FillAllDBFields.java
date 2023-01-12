@@ -1,40 +1,38 @@
-package com.maltsev.parser.service.addNewDataToDB;
+package com.maltsev.parser.service.parser;
 
 import com.maltsev.parser.entity.Framework;
 import com.maltsev.parser.entity.Vacancy;
 import com.maltsev.parser.entity.Requirement;
-import com.maltsev.parser.entity.emuns.Frameworks;
-import com.maltsev.parser.entity.emuns.Requirements;
-import com.maltsev.parser.entity.emuns.Vacancies;
+import com.maltsev.parser.entity.emuns.*;
 import com.maltsev.parser.repository.FrameworkRepository;
 import com.maltsev.parser.repository.VacancyRepository;
 import com.maltsev.parser.repository.RequirementRepository;
-import com.maltsev.parser.service.dataEnums.*;
-import com.maltsev.parser.service.vacanciesSite.WorkUa;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.maltsev.parser.service.date_manager.DateService;
+
+import com.maltsev.parser.service.data_sources.impl.WorkUa;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
-import static com.maltsev.parser.service.dataCounters.FrameworksCounterByName.frameworksCounter;
-import static com.maltsev.parser.service.dataCounters.VacanciesCounterByName.vacanciesCounter;
+import static com.maltsev.parser.service.date_manager.DateService.*;
+import static com.maltsev.parser.service.data_manager.FrameworksCounterByName.frameworksCounter;
+import static com.maltsev.parser.service.data_manager.VacanciesCounterByName.vacanciesCounter;
 
 @EnableScheduling
 public class FillAllDBFields {
-    @Autowired
-    FrameworkRepository frameworkRepository;
-    @Autowired
-    VacancyRepository vacancyRepository;
-    @Autowired
-    RequirementRepository requirementRepository;
 
-    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM");
-    Date date = new Date(System.currentTimeMillis());
+    private final FrameworkRepository frameworkRepository;
+    private final VacancyRepository vacancyRepository;
+    private final RequirementRepository requirementRepository;
+
+    public FillAllDBFields(FrameworkRepository frameworkRepository, VacancyRepository vacancyRepository, RequirementRepository requirementRepository) {
+        this.frameworkRepository = frameworkRepository;
+        this.vacancyRepository = vacancyRepository;
+        this.requirementRepository = requirementRepository;
+    }
 
     @Scheduled(cron = "0 1 0 1 * *")
     public void runAfterObjectCreated() throws ExecutionException, InterruptedException {
@@ -43,12 +41,12 @@ public class FillAllDBFields {
 
         String[] frameworks = Frameworks.getFrameworksArray();
         String[] vacancies = Vacancies.getVacanciesArray();
-        String[] vacanciesForChart = IVacancies.vacanciesForChart;
+        String[] vacanciesForChart = VacanciesForChart.getAllVacanciesForChart();
         String[] requirements = Requirements.getRequirementsArray();
-        String[] requirementsForChart = IRequirements.requirementsForChart;
+        String[] requirementsForChart = RequirementsForChart.getAllRequirementsForChart();
 
         for(int i = 0; i < frameworks.length; i++){
-            Framework framework1 = new Framework(frameworks[i], frameworksCounter(frameworks[i], allDescriptionsSet), formatter.format(date));
+            Framework framework1 = new Framework(frameworks[i], frameworksCounter(frameworks[i], allDescriptionsSet), DateService.formatter.format(date));
             frameworkRepository.save(framework1);
         }
 

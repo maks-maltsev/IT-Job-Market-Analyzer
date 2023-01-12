@@ -2,16 +2,15 @@ package com.maltsev.parser.controller;
 
 import com.maltsev.parser.entity.Vacancy;
 import com.maltsev.parser.repository.VacancyRepository;
-import com.maltsev.parser.service.DataService;
+import com.maltsev.parser.service.date_manager.DateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
-import static com.maltsev.parser.service.DataService.*;
+import static com.maltsev.parser.service.date_manager.DateService.*;
 
 @Controller
 public class VacancyController {
@@ -27,7 +26,7 @@ public class VacancyController {
     public String showVacanciesRating(Model model) {
 
         List<Vacancy> vacancyList = vacancyRepository
-                .findVacanciesByDateOrderByAmountDesc(DataService.formatter.format(date));
+                .findVacanciesByDateOrderByAmountDesc(DateService.formatter.format(date));
 
         for (Vacancy vacancy : vacancyList){
             vacanciesMap.put(vacancy.getName(), (double) vacancy.getAmount());

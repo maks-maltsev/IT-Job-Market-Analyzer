@@ -2,7 +2,7 @@ package com.maltsev.parser.controller;
 
 import com.maltsev.parser.entity.Framework;
 import com.maltsev.parser.repository.FrameworkRepository;
-import com.maltsev.parser.service.DataService;
+import com.maltsev.parser.service.date_manager.DateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
-import static com.maltsev.parser.service.DataService.*;
+import static com.maltsev.parser.service.date_manager.DateService.*;
 
 @Controller
 public class FrameworkController {
@@ -26,7 +26,7 @@ public class FrameworkController {
     public String showFrameworksRating(Model model) {
 
         List<Framework> frameworkList = frameworkRepository
-                .findFrameworksByDateOrderByAmountDesc(DataService.formatter.format(date));
+                .findFrameworksByDateOrderByAmountDesc(DateService.formatter.format(date));
 
         for (Framework framework : frameworkList){
             frameworksMap.put(framework.getName(), (double) framework.getAmount());

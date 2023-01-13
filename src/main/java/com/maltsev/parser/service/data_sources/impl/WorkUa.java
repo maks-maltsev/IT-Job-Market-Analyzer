@@ -37,7 +37,7 @@ public class WorkUa extends AbstractSite {
     }
 
     @Override
-    public Set<String> selectDescriptions(String siteLink) throws IOException, InterruptedException {
+    public Set<String> selectVacanciesDescriptions(String siteLink) throws IOException, InterruptedException {
         System.out.println("Збір описів ваканасій з сайта " + siteName + " ...");
         for(int i = 1; i <= pages; i++) {
             Thread.sleep(100);

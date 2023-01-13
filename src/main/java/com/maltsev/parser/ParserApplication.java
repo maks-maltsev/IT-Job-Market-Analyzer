@@ -2,7 +2,6 @@ package com.maltsev.parser;
 
 import com.maltsev.parser.repository.SubscriberRepository;
 import com.maltsev.parser.service.email_sander.EmailSenderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -10,10 +9,14 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 public class ParserApplication {
-	@Autowired
-	private EmailSenderService senderService;
-	@Autowired
-	private SubscriberRepository subscriberRepository;
+
+	private final EmailSenderService senderService;
+	private final SubscriberRepository subscriberRepository;
+
+	public ParserApplication(EmailSenderService senderService, SubscriberRepository subscriberRepository) {
+		this.senderService = senderService;
+		this.subscriberRepository = subscriberRepository;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ParserApplication.class, args);

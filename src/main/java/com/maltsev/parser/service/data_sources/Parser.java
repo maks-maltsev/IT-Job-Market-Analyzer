@@ -18,7 +18,7 @@ public class Parser implements Callable<Set<String>> {
 
     @Override
     public Set<String> call() throws Exception {
-        return abstractSite.selectDescriptions(abstractSite.getSiteLink());
+        return abstractSite.selectVacanciesDescriptions(abstractSite.getSiteLink());
     }
 
     public Set<String> returnAllDescriptions() throws ExecutionException, InterruptedException {

@@ -36,7 +36,7 @@ public class DjinniCo extends AbstractSite{
     }
 
     @Override
-    public Set<String> selectDescriptions(String siteLink) throws IOException {
+    public Set<String> selectVacanciesDescriptions(String siteLink) throws IOException {
         System.out.println("Збір описів ваканасій з сайта " + siteName + " ...");
         for(int i = 1; i <= pages; i++){
             Document linkDoc = Jsoup.connect(siteLink + i).get();

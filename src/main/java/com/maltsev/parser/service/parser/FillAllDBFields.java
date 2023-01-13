@@ -37,7 +37,7 @@ public class FillAllDBFields {
     @Scheduled(cron = "0 1 0 1 * *")
     public void runAfterObjectCreated() throws ExecutionException, InterruptedException {
         Set<String> allDescriptionsSet = new HashSet<>();
-        allDescriptionsSet.addAll(new WorkUa().returnAllDescriptions());
+        allDescriptionsSet.addAll(new WorkUa().getAllVacanciesDescriptions());
 
         String[] frameworks = Frameworks.getFrameworksArray();
         String[] vacancies = Vacancies.getVacanciesArray();

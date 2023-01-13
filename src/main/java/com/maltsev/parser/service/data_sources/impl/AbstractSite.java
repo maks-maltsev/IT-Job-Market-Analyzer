@@ -14,10 +14,10 @@ public abstract class AbstractSite implements Callable<Set<String>>, Site {
 
     @Override
     public Set<String> call() throws Exception {
-        return selectDescriptions(getSiteLink());
+        return selectVacanciesDescriptions(getSiteLink());
     }
 
-    public Set<String> returnAllDescriptions() throws ExecutionException, InterruptedException {
+    public Set<String> getAllVacanciesDescriptions() throws ExecutionException, InterruptedException {
         Set<String> allDescriptions = new HashSet<>();
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         Future<Set<String>> futureWorkUa = executorService.submit(()-> new WorkUa().call());
@@ -33,4 +33,5 @@ public abstract class AbstractSite implements Callable<Set<String>>, Site {
 
         return allDescriptions;
     }
+
 }

@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FillAllDBFieldsTest {
+public class ParserImplTest {
     Object o = new Object();
     List<Integer> l = new ArrayList<>();
 

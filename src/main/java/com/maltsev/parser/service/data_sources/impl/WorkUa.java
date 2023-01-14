@@ -19,6 +19,7 @@ public class WorkUa extends AbstractSite {
     private int pages = 100;
     private String siteName = "https://www.work.ua";
     private String siteLink = "https://www.work.ua/ru/jobs-it/?page=";
+    private String tagName = "h2";
 
     @Override
     public Set<String> selectVacanciesTitles(String siteLink) throws IOException {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class FrameworksCounterByName {
+public class FrameworksCounter {
 
     public static int frameworksCounter(String frameworkName, Set<String> descriptionsSet){
         int counter = 0;
@@ -16,7 +16,7 @@ public class FrameworksCounterByName {
                 counter++;
             }
         }
-        System.out.println(frameworkName + " : " + counter);
+
         return counter;
     }
 }

@@ -1,4 +1,4 @@
-package com.maltsev.parser.entity.emuns;
+package com.maltsev.parser.entity.enums;
 
 public enum RequirementsForChart {
     HTML ("HTML 5"),

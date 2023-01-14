@@ -13,12 +13,12 @@ import java.util.Set;
 @Getter
 public class DjinniCo extends AbstractSite{
 
-    private Set<String> vacanciesTitlesSet = new HashSet<>();
-    private Set<String> vacanciesDescriptionsSet = new HashSet<>();
+    private final Set<String> vacanciesTitlesSet = new HashSet<>();
+    private final Set<String> vacanciesDescriptionsSet = new HashSet<>();
     //4500 pages
-    private int pages = 100;
-    private String siteName = "https://djinni.co";
-    private String siteLink = "https://djinni.co/developers/?from=dou-footer&page=";
+    private final int pages = 100;
+    private final String siteName = "https://djinni.co";
+    private final String siteLink = "https://djinni.co/developers/?from=dou-footer&page=";
 
     @Override
     public Set<String> selectVacanciesTitles(String siteLink) throws IOException{

@@ -1,6 +1,6 @@
 <h1 align="center">IT-vacancies parser</h1>
 <h3>Purpose: </h3>
-<p>Implement a web application that collects data from few open sources, on porpuse to analyze the IT labor market of Ukraine in order to identify most demanded vacancies, most popular technologies, and requirements to candidates.</p>
+<p>Implement a web application that collects data from few open sources, on porpuse to analyze the IT jobs market of Ukraine in order to identify most demanded vacancies, most popular technologies, and requirements to candidates.</p>
 <h3>Functionality: </h3>
 <p>1. Collecting information about vacancies from few different resources automatically on the 1st day of each month.</p>
 <p>2. Data processing and adding the data to the database.</p>

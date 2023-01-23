@@ -14,7 +14,7 @@ import static com.maltsev.parser.service.date_manager.DateService.*;
 
 @Controller
 public class RequirementController {
-
+    private String currentDate = DateService.getFormattedDate();
     private final RequirementRepository requirementRepository;
     private Map<String, Double> requirementsMap = new LinkedHashMap<>();
 
@@ -25,7 +25,7 @@ public class RequirementController {
     @GetMapping("/requirements")
     public String requirementsPage (Model model){
         List<Requirement> requirementList = requirementRepository.
-                findRequirementsByDateOrderByAmountDesc(DateService.formatter.format(date));
+                findRequirementsByDateOrderByAmountDesc(currentDate);
 
         for (Requirement requirement : requirementList){
             requirementsMap.put(requirement.getName(), (double) requirement.getAmount());

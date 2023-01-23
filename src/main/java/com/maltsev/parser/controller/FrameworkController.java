@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
-import static com.maltsev.parser.service.date_manager.DateService.*;
-
 @Controller
 public class FrameworkController {
 
+    private String currentDate = DateService.getFormattedDate();
     private final FrameworkRepository frameworkRepository;
     private Map<String, Double> frameworksMap = new LinkedHashMap<>();
 
@@ -26,7 +25,7 @@ public class FrameworkController {
     public String showFrameworksRating(Model model) {
 
         List<Framework> frameworkList = frameworkRepository
-                .findFrameworksByDateOrderByAmountDesc(DateService.formatter.format(date));
+                .findFrameworksByDateOrderByAmountDesc(currentDate);
 
         for (Framework framework : frameworkList){
             frameworksMap.put(framework.getName(), (double) framework.getAmount());
@@ -40,7 +39,7 @@ public class FrameworkController {
 
     @GetMapping("/frameworks-date")
     public String showFrameworksRatingByDate(
-            @RequestParam(value = "chosenDate", defaultValue = "2022-05") String chosenDate,
+            @RequestParam(value = "chosenDate") String chosenDate,
                     Model model){
 
         List<Framework> frameworkList = frameworkRepository

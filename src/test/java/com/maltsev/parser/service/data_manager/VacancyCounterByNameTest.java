@@ -18,11 +18,11 @@ public class VacancyCounterByNameTest {
         int expValue = 2;
         String languageName = "java";
         Set<String> vacanciesSet = new HashSet<>();
-        vacanciesSet.add("Needed java developer");         // 1
+        vacanciesSet.add("Needed java developer");
         vacanciesSet.add("Project manager vacancy");
-        vacanciesSet.add("Junior Java QA");                 //2
+        vacanciesSet.add("Junior Java QA");
         vacanciesSet.add("HR vacancy");
-        vacanciesSet.add("Junior Java QA");                 //3 не будет занесена, т.к. структура данных - сэт
+        vacanciesSet.add("Junior Java QA");
         String frameworkName = "java";
 
         List<String> vacanciesList = new ArrayList<>();

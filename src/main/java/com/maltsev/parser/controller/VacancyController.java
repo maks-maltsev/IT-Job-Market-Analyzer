@@ -17,7 +17,7 @@ public class VacancyController {
 
     public final VacancyRepository vacancyRepository;
     private Map<String, Double> vacanciesMap = new LinkedHashMap<>();
-
+    private String currentDate = DateService.getFormattedDate();
     public VacancyController(VacancyRepository vacancyRepository) {
         this.vacancyRepository = vacancyRepository;
     }
@@ -26,7 +26,7 @@ public class VacancyController {
     public String showVacanciesRating(Model model) {
 
         List<Vacancy> vacancyList = vacancyRepository
-                .findVacanciesByDateOrderByAmountDesc(DateService.formatter.format(date));
+                .findVacanciesByDateOrderByAmountDesc(currentDate);
 
         for (Vacancy vacancy : vacancyList){
             vacanciesMap.put(vacancy.getName(), (double) vacancy.getAmount());

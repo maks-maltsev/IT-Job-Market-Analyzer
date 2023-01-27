@@ -9,15 +9,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class VacanciesCounter {
-    public static int vacanciesCounter(String languageName,
-                                       Set<String> vacanciesSet) {
+public class MatchesInVacanciesCounter {
 
+    public static int countAmountOfMatchesInVacancies(String name, Set<String> vacanciesSet) {
         int counter = 0;
         List<String> vacanciesList = new ArrayList<>(vacanciesSet);
         for(int i = 0; i < vacanciesList.size(); i++){
             Pattern namePattern = Pattern
-                    .compile(" " + languageName.toLowerCase() + "[\\s-,.=/']");
+                    .compile("\\PL+" + name.toLowerCase());
             Matcher matcher = namePattern
                     .matcher(vacanciesList
                             .get(i)
@@ -27,7 +26,6 @@ public class VacanciesCounter {
             }
         }
         return counter;
-
     }
 
 }

@@ -24,16 +24,18 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.*;
 
-import static com.maltsev.vacancies_parser.service.data_manager.FrameworksCounter.frameworksCounter;
-import static com.maltsev.vacancies_parser.service.data_manager.VacanciesCounter.vacanciesCounter;
+import static com.maltsev.vacancies_parser.service.data_manager.MatchesInVacanciesCounter.countAmountOfMatchesInVacancies;
 
 @Service
 @EnableScheduling
 public class MongoDBService {
 
-    private final FrameworkRepository frameworkRepository;
-    private final RequirementRepository requirementRepository;
-    private final VacancyRepository vacancyRepository;
+    @Autowired
+    private FrameworkRepository frameworkRepository;
+    @Autowired
+    private RequirementRepository requirementRepository;
+    @Autowired
+    private VacancyRepository vacancyRepository;
 
     private static Set<String> vacanciesInfo;
     private static List<Parser> parsers;
@@ -45,15 +47,7 @@ public class MongoDBService {
     @Autowired
     public MongoDBService(WorkUaParser workUaParser,
                           JobsUaParser jobsUaParser,
-                          FrameworkRepository frameworkRepository,
-                          RequirementRepository requirementRepository,
-                          VacancyRepository vacancyRepository,
                           DjinniCoParser djinniCoParser) {
-
-        this.frameworkRepository = frameworkRepository;
-        this.requirementRepository = requirementRepository;
-        this.vacancyRepository = vacancyRepository;
-
         vacanciesInfo = new HashSet<>();
         futures = new ArrayList<>();
 
@@ -66,7 +60,6 @@ public class MongoDBService {
                 jobsUaParser,
                 djinniCoParser
         );
-
     }
 
     @Scheduled(cron = "0 1 0 1 * *")
@@ -89,8 +82,9 @@ public class MongoDBService {
         for(int i = 0; i < frameworks.length; i++){
             Framework framework = new Framework(
                     frameworks[i],
-                    frameworksCounter(frameworks[i], vacanciesInfo),
-                    DateService.getFormattedDate());
+                    countAmountOfMatchesInVacancies(frameworks[i], vacanciesInfo),
+                    DateService.getFormattedDate()
+            );
             frameworkRepository.save(framework);
         }
 
@@ -101,8 +95,9 @@ public class MongoDBService {
         for (int i = 0; i < requirements.length; i++){
             Requirement requirement = new Requirement(
                     RequirementsForChart.getAllRequirementsForChart()[i],
-                    frameworksCounter(requirements[i], vacanciesInfo),
-                    DateService.getFormattedDate());
+                    countAmountOfMatchesInVacancies(requirements[i], vacanciesInfo),
+                    DateService.getFormattedDate()
+            );
             requirementRepository.save(requirement);
         }
 
@@ -113,8 +108,9 @@ public class MongoDBService {
         for (int i = 0; i < vacancies.length; i++){
             Vacancy vacancy = new Vacancy(
                     VacanciesForChart.getAllVacanciesForChart()[i],
-                    vacanciesCounter(vacancies[i], vacanciesInfo),
-                    DateService.getFormattedDate());
+                    countAmountOfMatchesInVacancies(vacancies[i], vacanciesInfo),
+                    DateService.getFormattedDate()
+            );
             vacancyRepository.save(vacancy);
         }
 

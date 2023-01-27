@@ -1,24 +1,34 @@
 package com.maltsev.vacancies_parser.service.data_manager;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
+import java.util.Set;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class VacancyCounterByNameTest {
 
     private int counter;
-    private List<String> vacanciesInfo;
+    private Set<String> vacanciesInfo;
     private String vacancyName;
+
+
     @Before
     public void beforeTests() {
 
-        vacanciesInfo = List.of(
-                "Needed java developer",
+        vacanciesInfo = Set.of(
+                "Needed java/developer",
                 "Project manager vacancy",
-                "Junior Java QA",
-                "HR vacancy"
+                "Junior ,Java, QA",
+                "HR vacancy",
+                "Ability to develop(laravel)"
         );
         vacancyName = "Java";
 
@@ -27,16 +37,7 @@ public class VacancyCounterByNameTest {
     @Test
     public void frameworksCounterShouldIncrementIfElementInListHaveFrameworkName(){
 
-        int expectedValue = 2;
-
-        for(int i = 0; i < vacanciesInfo.size(); i++){
-            if(vacanciesInfo
-                    .get(i)
-                    .toLowerCase()
-                    .contains(vacancyName.toLowerCase())) {
-                counter++;
-            }
-        }
-        Assert.assertEquals(expectedValue, counter);
+        int amount = MatchesInVacanciesCounter.countAmountOfMatchesInVacancies("Laravel", vacanciesInfo);
+        assertEquals(1, amount);
     }
 }

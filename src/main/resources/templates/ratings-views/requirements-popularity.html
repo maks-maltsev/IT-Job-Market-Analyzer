@@ -92,9 +92,9 @@
                 <h1 class="h2">Rating of requirements popularity</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
 
-                    <form action="/requirements-date">
+                    <form action="/requirements">
                         <label for="date">Pick required date: </label>
-                        <input type="month" id="date" name="chosenDate">
+                        <input type="month" id="date" name="date">
                         <input type="submit">
                     </form>
 
@@ -105,8 +105,8 @@
                 <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="1040" height="439" style="display: block; width: 1040px; height: 439px;"></canvas>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <script th:inline="javascript">
-                    let requirementsName = [[${requirementsName}]];
-                    let amount = [[${requirementsAmount}]]
+                    let requirementsName = [[${requirements}]];
+                    let amount = [[${amount}]]
                     const data = {
                         labels: requirementsName,
                         datasets: [{

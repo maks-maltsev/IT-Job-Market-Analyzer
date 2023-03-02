@@ -47,7 +47,7 @@
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/vacancies">IT analyzer</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <button value="Ok" class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 </header>
@@ -83,10 +83,9 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Frameworks popularity rating</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-
-                    <form action="/frameworks-date">
+                    <form action="/frameworks" method="get">
                         <label for="date">Pick required date: </label>
-                        <input type="month" id="date" name="chosenDate">
+                        <input type="month" id="date" name="date">
                         <input type="submit">
                     </form>
                 </div>
@@ -97,7 +96,7 @@
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <script th:inline="javascript">
                     let frameworks = [[${frameworks}]];
-                    let amount = [[${frameworksAmount}]]
+                    let amount = [[${amount}]]
 
                     const data = {
                         labels: frameworks,

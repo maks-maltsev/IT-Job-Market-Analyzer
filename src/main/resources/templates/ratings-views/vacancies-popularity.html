@@ -84,9 +84,9 @@
                 <h1 class="h2">Rating of IT vacancies popularity</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
 
-                    <form action="/vacancies-date" method="get">
+                    <form action="/vacancies" method="get">
                         <label for="date">Pick required date: </label>
-                        <input type="month" id="date" name="chosenDate">
+                        <input type="month" id="date" name="date">
                         <input type="submit">
                     </form>
 
@@ -98,7 +98,7 @@
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <script th:inline="javascript">
                     const lang = [[${vacancies}]];
-                    const amount = [[${vacanciesAmount}]];
+                    const amount = [[${amount}]];
 
                     const data = {
                         labels: lang,

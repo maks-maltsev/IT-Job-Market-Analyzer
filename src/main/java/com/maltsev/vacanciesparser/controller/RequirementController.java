@@ -19,11 +19,12 @@ import static com.maltsev.vacanciesparser.service.date.DateService.getFormattedD
 public class RequirementController {
 
     private final RequirementRepository requirementRepository;
-    private final Map<String, Integer> requirementsMap = new LinkedHashMap<>();
+    private final Map<String, Integer> requirementsMap;
 
     @Autowired
     public RequirementController(RequirementRepository requirementRepository) {
         this.requirementRepository = requirementRepository;
+        requirementsMap = new LinkedHashMap<>();
     }
 
     @GetMapping

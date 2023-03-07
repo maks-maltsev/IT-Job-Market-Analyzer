@@ -24,11 +24,14 @@ public enum Requirements {
     SCRUM ("Scrum"),
     AGILE ("Agile"),
     KANBAN ("Kanban"),
-    ONEYEAR ("1+"),
-    TWOYEARS ("2+"),
-    THREEYEARS ("3+"),
-    FOURYEARS ("4+"),
-    FIFEYEARS ("5+");
+    JIRA ("Jira"),
+    JUNIOR ("Junior"),
+    MIDDLE ("Middle"),
+    SENIOR ("Senior"),
+    PRE_INTERMEDIATE ("Pre-intermediate"),
+    INTERMEDIATE ("Intermediate"),
+    UPPER_INTERMEDIATE ("Upper-intermediate"),
+    ADVANCED ("Advanced");
 
     private final String title;
 

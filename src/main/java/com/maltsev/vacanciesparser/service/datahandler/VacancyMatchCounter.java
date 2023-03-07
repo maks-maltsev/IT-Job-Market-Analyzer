@@ -2,8 +2,6 @@ package com.maltsev.vacanciesparser.service.datahandler;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,13 +21,12 @@ public class VacancyMatchCounter {
      */
     public static int getMatchCount(String name, Set<String> vacanciesSet) {
         int counter = 0;
-        List<String> vacanciesList = new ArrayList<>(vacanciesSet);
+        Pattern namePattern = Pattern.compile(name.toLowerCase() + "\\P{L}");
+        Matcher matcher;
 
-        for (String vacancy : vacanciesList) {
-            Pattern namePattern = Pattern.compile(".*" + name.toLowerCase() + ".*");
-            Matcher matcher = namePattern.matcher(vacancy.toLowerCase());
-
-            while (matcher.find()) {
+        for (String vacancy : vacanciesSet) {
+            matcher = namePattern.matcher(vacancy.toLowerCase());
+            if (matcher.find()) {
                 counter++;
             }
         }

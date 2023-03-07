@@ -1,13 +1,21 @@
 <div th:fragment="footer">
-    <footer class="footer mt-auto py-3 bg-light">
-        <div class="container">
-            <form method="GET" action="/subscribe">
-                Subscribe monthly updates: <input type="email" name="emailSub" placeholder="email">
-                <input type="submit" value="Subscribe">
-            </form>
-            <form method="GET" action="/unsubscribe">
-                <input type="submit" value="Unsubscribe">
-            </form>
+    <footer class="bg-light py-3">
+        <div class="container my-4">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form method="GET" action="/subscribe" class="d-flex justify-content-center">
+                        <div class="input-group">
+                            <input type="email" name="emailSub" class="form-control" placeholder="Enter your email">
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 mt-3 mt-md-0">
+                    <form method="GET" action="/unsubscribe" class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-secondary">Unsubscribe</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </footer>
 </div>

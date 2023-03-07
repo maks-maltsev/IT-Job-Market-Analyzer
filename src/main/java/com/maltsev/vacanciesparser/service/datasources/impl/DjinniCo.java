@@ -10,7 +10,7 @@ import lombok.Getter;
 @Component
 public class DjinniCo implements Site {
 
-    private final int pages = 100;
+    private final int pages = 30;
     private final String url = "https://djinni.co";
     private final String vacanciesPageUrl = "https://djinni.co/jobs/?page=";
 

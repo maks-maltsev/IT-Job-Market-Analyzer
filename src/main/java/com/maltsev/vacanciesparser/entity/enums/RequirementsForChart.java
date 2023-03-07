@@ -22,11 +22,14 @@ public enum RequirementsForChart {
     SCRUM ("Scrum methodology"),
     AGILE ("Agile methodology"),
     KANBAN ("Kanban methodology"),
-    ONEYEAROFEXP ("1+ years of experience"),
-    TWOYEARSOFEXP ("2+ years of experience"),
-    THREEYEARSOFEXP ("3+ years of experience"),
-    FOURYEARSOFEXP ("4+ years of experience"),
-    FIVEYEARSOFEXP ("5+ years of experience");
+    JIRA ("Jira"),
+    JUNIOR ("Junior developer"),
+    MIDDLE ("Middle developer"),
+    SENIOR ("Senior developer"),
+    PRE_INTERMEDIATE ("Pre-intermediate eng. (A2)"),
+    INTERMEDIATE ("Intermediate eng. (B1)"),
+    UPPER_INTERMEDIATE ("Upper-intermediate eng. (B2)"),
+    ADVANCED ("Advanced eng. (C1)");
 
     private final String title;
 

@@ -10,8 +10,6 @@ import com.maltsev.vacanciesparser.repository.VacancyRepository;
 import com.maltsev.vacanciesparser.service.date.DateService;
 import org.springframework.stereotype.Service;
 
-import static com.maltsev.vacanciesparser.service.datahandler.VacancyMatchCounter.getMatchCount;
-
 /**
  * The VacancyDataInserter class is responsible for inserting new data into the database.
  * This class also utilizes the VacancyDataFetcher class to get the latest data from a remote source.
@@ -28,7 +26,6 @@ public class VacancyDataInserter {
     private final String[] frameworks;
     private final String[] vacancies;
     private final String[] requirements;
-
     private final VacancyDataFetcher vacancyDataFetcher;
 
     public VacancyDataInserter(FrameworkRepository frameworkRepository,
@@ -46,7 +43,7 @@ public class VacancyDataInserter {
         this.requirements = Requirements.getRequirementsArray();
     }
 
-    public void insertNewDataIntoDB() throws Exception {
+    public void insertNewDataIntoDB() {
         refreshVacanciesSet();
         insertFrameworksIntoDB();
         insertRequirementsIntoDB();
@@ -57,7 +54,7 @@ public class VacancyDataInserter {
         for (String frameworkName : frameworks) {
             Framework framework = new Framework(
                     frameworkName,
-                    getMatchCount(frameworkName, vacancyDataFetcher.getVacanciesSet()),
+                    VacancyMatchCounter.getMatchCount(frameworkName, vacancyDataFetcher.getVacanciesSet()),
                     DateService.getFormattedDate()
             );
             frameworkRepository.save(framework);
@@ -68,7 +65,7 @@ public class VacancyDataInserter {
         for (int i = 0; i < requirements.length; i++){
             Requirement requirement = new Requirement(
                     RequirementsForChart.getAllRequirementsForChart()[i],
-                    getMatchCount(requirements[i], vacancyDataFetcher.getVacanciesSet()),
+                    VacancyMatchCounter.getMatchCount(requirements[i], vacancyDataFetcher.getVacanciesSet()),
                     DateService.getFormattedDate()
             );
             requirementRepository.save(requirement);
@@ -79,14 +76,14 @@ public class VacancyDataInserter {
         for (int i = 0; i < vacancies.length; i++){
             Vacancy vacancy = new Vacancy(
                     VacanciesForChart.getAllVacanciesForChart()[i],
-                    getMatchCount(vacancies[i], vacancyDataFetcher.getVacanciesSet()),
+                    VacancyMatchCounter.getMatchCount(vacancies[i], vacancyDataFetcher.getVacanciesSet()),
                     DateService.getFormattedDate()
             );
             vacancyRepository.save(vacancy);
         }
     }
 
-    private void refreshVacanciesSet() throws Exception {
+    private void refreshVacanciesSet() {
         vacancyDataFetcher.getAllVacanciesData();
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+
 /**
  * This class is responsible for scheduling the insertion of new vacancy data into the database.
  * It uses the VacancyDataInserter class to insert new data and runs on a schedule specified by a cron expression.
@@ -21,7 +23,7 @@ public class VacancyDataScheduler {
     }
 
     @Scheduled(cron = "0 1 0 1 * *")
-    private void insertNewDataIntoDB() throws Exception {
+    private void insertNewDataIntoDB() {
         vacancyDataInserter.insertNewDataIntoDB();
     }
 

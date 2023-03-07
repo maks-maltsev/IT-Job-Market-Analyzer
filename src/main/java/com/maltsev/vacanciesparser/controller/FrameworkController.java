@@ -32,9 +32,7 @@ public class FrameworkController {
                                       Model model) {
         List<Framework> frameworkList = date.map(frameworkRepository::findFrameworksByDateOrderByAmountDesc)
                 .orElseGet(() -> frameworkRepository.findFrameworksByDateOrderByAmountDesc(getFormattedDate()));
-        if(frameworkList.isEmpty()) {
-            frameworkList = frameworkRepository.findFrameworksByDateOrderByAmountDesc(getFormattedDate());
-        }
+
         frameworksMap.clear();
         buildFrameworksMap(frameworkList);
 

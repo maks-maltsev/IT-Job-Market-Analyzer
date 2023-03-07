@@ -5,7 +5,7 @@ public enum VacanciesForChart {
     JAVA_DEV ("Java developer"),
     C_SHARP_DEV ("C# developer"),
     ONE_C_DEV ("1C developer"),
-    GO_LANG_DEV ("GOlang developer"),
+    GO_LANG_DEV ("Golang developer"),
     SCALA_DEV ("Scala developer"),
     JAVASCRIPT_DEV ("JavaScript developer"),
     PHP_DEV ("Php developer"),

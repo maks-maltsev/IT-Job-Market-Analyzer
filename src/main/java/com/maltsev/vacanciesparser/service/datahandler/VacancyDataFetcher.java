@@ -4,6 +4,10 @@ import com.maltsev.vacanciesparser.service.parser.Parser;
 import com.maltsev.vacanciesparser.service.parser.impl.DjinniCoParser;
 import com.maltsev.vacanciesparser.service.parser.impl.JobsUaParser;
 import com.maltsev.vacanciesparser.service.parser.impl.WorkUaParser;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +26,7 @@ public class VacancyDataFetcher {
 
     private final List<Parser> parsers;
     private final Set<String> vacanciesSet;
+    private static final Logger logger = LoggerFactory.getLogger(VacancyDataFetcher.class);
 
     @Autowired
     public VacancyDataFetcher(WorkUaParser workUaParser,
@@ -35,7 +40,7 @@ public class VacancyDataFetcher {
         );
     }
 
-    public void getAllVacanciesData() throws Exception {
+    public void getAllVacanciesData() {
         vacanciesSet.clear();
         ExecutorService executorService = Executors.newFixedThreadPool(parsers.size());
 
@@ -44,14 +49,23 @@ public class VacancyDataFetcher {
                 .collect(Collectors.toList());
 
         executorService.shutdown();
-        executorService.awaitTermination(1, TimeUnit.HOURS);
+        try {
+            executorService.awaitTermination(1, TimeUnit.HOURS);
+        } catch (InterruptedException e) {
+            logger.error("Thread was interrupted while waiting for all tasks to finish.", e);
+            Thread.currentThread().interrupt();
+        }
         addVacanciesDataToSet(futures);
     }
 
-    private void addVacanciesDataToSet(List<Future<Set<String>>> vacanciesFutures) throws Exception {
+    private void addVacanciesDataToSet(List<Future<Set<String>>> vacanciesFutures) {
         vacanciesSet.clear();
         for (Future<Set<String>> future : vacanciesFutures) {
-            vacanciesSet.addAll(future.get());
+            try {
+                vacanciesSet.addAll(future.get());
+            } catch (InterruptedException | ExecutionException e) {
+                logger.error("Error occurred while adding vacancies data to set: {}", e.getMessage(), e);
+            }
         }
     }
 

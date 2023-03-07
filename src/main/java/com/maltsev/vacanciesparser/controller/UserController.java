@@ -40,12 +40,12 @@ public class UserController {
                                    @RequestParam(value = "confirmationCode") int code) {
         Subscriber subscriber = subscriberRepository.findFirstByEmail(email);
 
-        if(subscriber.getCode() == code){
+        if(subscriber.getCode() == code) {
             subscriber.setConfirmation(true);
             subscriberRepository.save(subscriber);
             return "redirect:/";
         }
-        else{
+        else {
             return "subscription-views/confirm-form";
         }
     }

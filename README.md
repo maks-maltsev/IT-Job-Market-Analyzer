@@ -1,4 +1,4 @@
-# IT-vacancies parser
+# IT Jobs Market Analyzer
 
 ## Objective
 

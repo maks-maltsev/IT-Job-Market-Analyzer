@@ -17,11 +17,11 @@ make more informed decisions by providing accurate and up-to-date information on
 
 ## Result
 
-![image](https://user-images.githubusercontent.com/48401922/222913450-3a02381b-313b-4539-8eb9-1925804f6974.png)
+![image](https://user-images.githubusercontent.com/48401922/223706852-3ef1aff4-92cc-49fd-b1c3-b2417c36e92d.png)
 
-![image](https://user-images.githubusercontent.com/48401922/222913474-fef503a8-0403-4964-afe8-729c9f02452e.png)
+![image](https://user-images.githubusercontent.com/48401922/223706950-10f5ac13-8934-45bc-9a50-592512223a47.png)
 
-![image](https://user-images.githubusercontent.com/48401922/222913495-994121f2-07da-40db-86c1-f64c6d6dfc3c.png)
+![image](https://user-images.githubusercontent.com/48401922/223707004-ab55d925-1585-4294-ae83-20d8a04e80a7.png)
 
 ## Technologies Used
 
@@ -31,4 +31,5 @@ This web application was built using the following technologies:
 - Database: MongoDB
 - Frontend: HTML, Thymeleaf, CSS, Bootstrap 5, JavaScript
 - Build Tool: Maven
+- Logging: Logback
 - Other Libraries: Lombok, JSoup

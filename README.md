@@ -1,4 +1,4 @@
-# IT Jobs Market Analyzer
+# IT Job Market Analyzer
 
 ## Objective
 
